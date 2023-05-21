@@ -1,13 +1,28 @@
-body {
-  margin: 0;
-  font-family: monospace;
-  background-image: url(../images/logo.png);
-  background-size: 20%;
-  background-position: 50% 25%;
-  background-repeat: no-repeat;
-  background-color: #d9d9d9;
+* {
+  margin: 0%;
 }
 
-html {
-  height: 100%;
+.login-style {
+  font-family: monospace;
+  margin: 0% 40%;
+}
+.login-background {
+  background-image: url(../images/logo.png);
+  background-size: 20%;
+  background-position: 50% 10%;
+  background-repeat: no-repeat;
+  background-color: #d9d9d9;
+  height: 100vh;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 85%;
+  padding-top: 40%;
+}
+
+.login-slogan {
+  text-align: center;
+  font-size: 32px;
 }
