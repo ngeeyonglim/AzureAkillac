@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  font-family: monospace;
+  background-image: url(../images/logo.png);
+  background-size: 20%;
+  background-position: 50% 25%;
+}
+
+html {
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
