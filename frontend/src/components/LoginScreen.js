@@ -25,6 +25,9 @@ export default function LoginScreen() {
                 password_label: "Password:",
                 button_label:"LOGIN"
             },
+            forgotten_password: {
+                button_label: "Reset"
+            }
             }
           }} />
           </div>
