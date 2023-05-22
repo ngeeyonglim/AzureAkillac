@@ -3,11 +3,15 @@
   font-family: monospace;
 }
 
+::placeholder {
+  color: black;
+}
+
 .login-style {
   margin: 0% 40%;
 }
 .login-background {
-  background-image: url(../images/logo.png);
+  background-image: url(./images/logo.png);
   background-size: 20%;
   background-position: 50% 10%;
   background-repeat: no-repeat;
@@ -54,11 +58,66 @@
   border-radius: 15px;
   background-color: #29BDC5;
   height: 30px;
-  color: black;
-  opacity: 100%;
 }
 
 .login-container {
   font-size: 16px;
   text-align: center;
+}
+
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+  background-color: #d9d9d9;
+}
+
+.navlist {
+  list-style-type: none;
+}
+
+.logout-button {
+  margin: 25px 5px;
+  height: 25px;
+  width: 70px;
+  border: none;
+  border-radius: 12.5px;
+  background-color: #29BDC5;
+}
+.header {
+  padding: 10px;
+  position: absolute;
+  left: 200px;
+  font-size: 50px;
+}
+
+.page-logo {
+  height: 70px;
+  width: 60px;
+}
+
+.search-button {
+  position: absolute;
+  height: 40px;
+  top: 15px;
+  right: 165px;
+  z-index: 1;
+}
+
+.search-bar {
+  position: absolute;
+  right:10%;
+  margin:5px;
+  background-color: #29BDC5;
+  height: 60px;
+  width: 375px;
+  font-size: 24px;
+  text-align: center;
+  border: none;
+  border-radius: 35px;
+}
+
+.test {
+  background-color: black;
 }

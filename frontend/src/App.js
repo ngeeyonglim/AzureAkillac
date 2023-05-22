@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabase";
 import LoginScreen from "./components/LoginScreen";
-import MainScreen from "./components/MainScreen";
+import HomeScreen from "./components/HomeScreen";
+import { Route, Routes } from "react-router-dom";
+import SearchScreen from "./components/SearchScreen";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -14,7 +16,10 @@ export default function App() {
   }, []);
   return (
     <div>
-      {session ? <MainScreen /> : <LoginScreen />}
+      <Routes>
+        <Route path="/" element={session ? <HomeScreen /> : <LoginScreen />} />
+        <Route path="/search" element={<SearchScreen />} />
+      </Routes>
     </div>
   );
 }
