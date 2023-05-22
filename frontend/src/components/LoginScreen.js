@@ -9,21 +9,23 @@ export default function LoginScreen() {
         <h2 className="login-slogan">Soar and Score</h2>
         <Auth 
         supabaseClient={supabase} 
-        appearance={{ extend:true,
+        appearance={{ extend:false,
         className:{
             button: "login-button",
             anchor: "login-anchor",
-            divider: "login-divider"
+            input: "login-input",
+            message: "login-message",
+            container: "login-container"
         }}}
         providers={[]}
         localization={{
             variables: {
-              sign_in: {
-                email_label: "Username",
-                password_label: "Password",
-                button_label:"Login"
-              },
+            sign_in: {
+                email_label: "Username:",
+                password_label: "Password:",
+                button_label:"LOGIN"
             },
+            }
           }} />
           </div>
           </div>

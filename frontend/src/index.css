@@ -1,9 +1,9 @@
 * {
   margin: 0%;
+  font-family: monospace;
 }
 
 .login-style {
-  font-family: monospace;
   margin: 0% 40%;
 }
 .login-background {
@@ -25,4 +25,38 @@
 .login-slogan {
   text-align: center;
   font-size: 32px;
+}
+
+.login-message {
+  text-align: center;
+}
+
+.login-button {
+  margin: 5px 40%;
+  height: 25px;
+  width: 70px;
+  border: none;
+  border-radius: 12.5px;
+  background-color: #29BDC5;
+}
+
+.login-anchor {
+  color: blue;
+  display: inline-block;
+  width: 300px;
+}
+
+.login-input {
+  text-align: center;
+  width: 190px;
+  margin: 5px 5px; 
+  border: none;
+  border-radius: 15px;
+  background-color: #29BDC5;
+  height: 30px;
+}
+
+.login-container {
+  font-size: 16px;
+  text-align: center;
 }
