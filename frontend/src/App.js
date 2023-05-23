@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabase";
+import { Route, Routes } from "react-router-dom";
 import LoginScreen from "./components/LoginScreen";
 import HomeScreen from "./components/HomeScreen";
-import { Route, Routes } from "react-router-dom";
 import SearchScreen from "./components/SearchScreen";
 
 export default function App() {
