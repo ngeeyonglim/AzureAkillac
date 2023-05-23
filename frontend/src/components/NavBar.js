@@ -17,18 +17,18 @@ export default function NavBar() {
                      className="page-logo"/>
                 </Link></li>
                 <li><Link to="/search">
-                    <img alt="search" 
-                    src={require("../images/search-logo.png")} 
-                    className="search-button"/>
+                    <input type="text" 
+                className="search-bar" 
+                placeholder="Search for Courses"></input>
                  </Link></li>
             </ul>
         </nav>
             <h1 className="header">
                 AkillaC
             </h1>
-            <input type="text" 
-                className="search-bar" 
-                placeholder="Search for Courses"></input>
+                <img alt="search" 
+                src={require("../images/search-logo.png")} 
+                className="search-button"/>
             <button className = "logout-button" onClick = {handleLogOutClick}>
                 LOGOUT
             </button>

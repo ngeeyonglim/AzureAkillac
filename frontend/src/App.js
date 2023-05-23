@@ -3,7 +3,7 @@ import { supabase } from "./supabase";
 import { Route, Routes } from "react-router-dom";
 import LoginScreen from "./components/LoginScreen";
 import HomeScreen from "./components/HomeScreen";
-import SearchScreen from "./components/SearchScreen";
+import PypListManager from "./components/PypListManger";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -18,7 +18,7 @@ export default function App() {
     <div>
       <Routes>
         <Route path="/" element={session ? <HomeScreen /> : <LoginScreen />} />
-        <Route path="/search" element={<SearchScreen />} />
+        <Route path="/search" element={<PypListManager />} />
       </Routes>
     </div>
   );

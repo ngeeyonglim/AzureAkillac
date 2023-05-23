@@ -1,10 +1,12 @@
-import NavBar from "./NavBar";
+import EmptyList from "./EmptyList";
+import PypList from "./PypList";
 
-export default function SearchScreen() {
+export default function SearchScreen({pyp}) {
     return (
-        <div>
-            <NavBar />
-            <h1>Searching...</h1>
-        </div>
-    )
+        <h1>
+            {pyp.length > 0 
+            ? (<PypList pyp={pyp} />) 
+            : (<EmptyList />)}
+        </h1>
+    );
 }
