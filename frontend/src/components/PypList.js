@@ -5,8 +5,8 @@ export default function PypList({pyp}) {
         <table>
             <thead>
                 <tr>
-                <th>Course</th>
-                <th>Name</th>
+                    <th>Course</th>
+                    <th>Name</th>
                 </tr>
             </thead>
             <tbody>

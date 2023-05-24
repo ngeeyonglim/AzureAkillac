@@ -49,10 +49,8 @@ export default function PypListManager() {
         pypName: ""});
     };
 
-
     const handleSetCourseCode = (event) => {
         setCourseCode(event.target.value);
-        console.log("hi");
     };
 
     const handleSetFilteredCourse = (event) => {
@@ -69,7 +67,7 @@ export default function PypListManager() {
             <NavBar courseCode={courseCode} 
             handleSetCourseCode={handleSetCourseCode}
             handleSetFilteredCourse={handleSetFilteredCourse}/>
-            {pyp && <SearchScreen pyp={pyp} filteredCourse={filteredCourse}/>}
+            <SearchScreen pyp={pyp} filteredCourse={filteredCourse}/>
              <UploadScreen 
              uploadPyp={uploadPyp}
              handleUploadPyp={handleUploadPyp} 
