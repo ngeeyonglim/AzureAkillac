@@ -1,8 +1,10 @@
 import { supabase } from "../supabase";
 import { Link } from "react-router-dom";
 
-export default function NavBar({courseCode, handleSetCourseCode, handleSetFilteredCourse}) {
+export default function NavBar({courseCode, 
+    handleSetCourseCode, handleSetFilteredCourse}) {
 
+    // Logs out the user    
     const handleLogOutClick = () => {
         supabase.auth.signOut();
     };
@@ -11,11 +13,13 @@ export default function NavBar({courseCode, handleSetCourseCode, handleSetFilter
         <div className="navbar">
         <nav>
             <ul className="navlist">
+                {/* Logo that links to the home page */}
                 <li><Link to="/">
                     <img alt="logo" 
                      src={require("../images/logo.png")} 
                      className="page-logo"/>
                 </Link></li>
+                {/* Search bar that links to the search page */}
                 <li><Link to="/search">
                     <input type="text" 
                     value={courseCode}
@@ -29,13 +33,15 @@ export default function NavBar({courseCode, handleSetCourseCode, handleSetFilter
             <h1 className="header">
                 AkillaC
             </h1>
-                <button type="submit"
+            {/* Button that confirms the search input and search for pyps */}
+            <button type="submit"
                 onClick={handleSetFilteredCourse} 
                 className="search-button-submit">
-                    <img alt="search" 
-                    src={require("../images/search-logo.png")} 
-                    className="search-button"/>
-                </button>
+                <img alt="search" 
+                src={require("../images/search-logo.png")} 
+                className="search-button"/>
+            </button>
+            {/* Button that logout */}
             <button className = "logout-button" onClick = {handleLogOutClick}>
                 LOGOUT
             </button>

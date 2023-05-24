@@ -9,10 +9,16 @@ export default function SearchScreen({pyp, filteredCourse}) {
             </h1>
         );
     } else {
-        const filteredPyp = pyp.filter((pyp) => pyp.courseCode === filteredCourse);
+        const filteredPyp = pyp.filter(
+            (pyp) => 
+            filteredCourse.toLowerCase() === pyp.courseCode
+                                                .slice(0, filteredCourse.length)
+                                                .toLowerCase());
         return (
             <h1>
-                {filteredPyp.length > 0 ? <PypList pyp={filteredPyp} /> : <EmptyList />}
+                {filteredPyp.length > 0 
+                ? <PypList pyp={filteredPyp} /> 
+                : <EmptyList />}
             </h1>
         );
     }
