@@ -17,22 +17,47 @@ function setStoredPyp(newPyp) {
 }
 
 export default function PypListManager() {
-    const [pyp, setPyp] = useState(getStoredPyps());
-    const [uploadPyp, setUploadPyp] = useState("");
+  const [pyp, setPyp] = useState(getStoredPyps());
+  const [uploadPyp, setUploadPyp] = useState(
+    {
+      courseCode: "",
+      pypName: ""
+    }
+    );
+  const [courseCode, setCourseCode] = useState("");
+  const [filteredCourse, setFilteredCourse] = useState("");
 
     const handleUploadPyp = (event) => {
-        setUploadPyp(event.target.value);
+      const { name, value } = event.target;
+      setUploadPyp({
+        ...uploadPyp,
+        [name] : value
+      });
     };
     
     const handleSetPyp = (event) => {
         event.preventDefault();
         setPyp([
             {
-                pypName : uploadPyp
+                courseCode : uploadPyp.courseCode,
+                pypName : uploadPyp.pypName
             },
             ...pyp
         ]);
-        setUploadPyp("");
+        setUploadPyp({
+        courseCode: "",
+        pypName: ""});
+    };
+
+
+    const handleSetCourseCode = (event) => {
+        setCourseCode(event.target.value);
+        console.log("hi");
+    };
+
+    const handleSetFilteredCourse = (event) => {
+        setFilteredCourse(courseCode);
+        setCourseCode("");
     };
 
     useEffect(() => {
@@ -41,8 +66,10 @@ export default function PypListManager() {
 
     return (
         <div>
-            <NavBar />
-            {pyp && <SearchScreen pyp={pyp} />}
+            <NavBar courseCode={courseCode} 
+            handleSetCourseCode={handleSetCourseCode}
+            handleSetFilteredCourse={handleSetFilteredCourse}/>
+            {pyp && <SearchScreen pyp={pyp} filteredCourse={filteredCourse}/>}
              <UploadScreen 
              uploadPyp={uploadPyp}
              handleUploadPyp={handleUploadPyp} 

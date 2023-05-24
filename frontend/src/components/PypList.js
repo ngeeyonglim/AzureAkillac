@@ -1,15 +1,19 @@
 export default function PypList({pyp}) {
     return (
         <>
-        <h1>Results</h1>
+        <h1>Past Year Papers</h1>
         <table>
             <thead>
-                <td>Name</td>
+                <tr>
+                <th>Course</th>
+                <th>Name</th>
+                </tr>
             </thead>
             <tbody>
                 {pyp.map((pyp) =>  {
                     return (
                     <tr>
+                        <td>{pyp.courseCode}</td>
                         <td>{pyp.pypName}</td>
                     </tr> 
                 );
