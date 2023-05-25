@@ -8,7 +8,8 @@
 }
 
 table {
-  width:300px;
+  width:500px;
+  text-align: left;
 }
 
 .login-style {
@@ -89,6 +90,10 @@ table {
   background-color: #29BDC5;
 }
 
+.logout-button:hover {
+  cursor: pointer;
+}
+
 .header {
   padding: 10px;
   position: absolute;
@@ -103,27 +108,12 @@ table {
 
 .search-button {
   position: absolute;
-  right: 1%;
+  right: 0%;
   top: 2.2%; 
+  margin-right: 130px;
   height: 40px;
   z-index: 1;
   border: none;
-}
-
-.search-button:hover {
-  cursor: pointer;
-}
-
-.search-button-submit {
-  position: absolute;
-  right: 2%;
-  top: 2.2%;
-  margin-right: 100px;
-  height: 40px;
-  width: 40px;
-  z-index: 1;
-  border: none;
-  background-color: transparent;
 }
 
 .search-bar {
@@ -145,9 +135,47 @@ table {
   right: 0%;
   top: 10%;
   margin: 10px;
+  display: grid;
 }
 
+.form-label {
+  width: 100px;
+}
+
+.upload-input {
+  text-align: center;
+  padding: 10px;
+  height: 15px;
+  width: 458px;
+  border: none;
+  border-radius: 20px;
+  background-color: #29BDC5;
+}
+
+.upload-qna , .upload-sem {
+  display: grid;
+  grid-auto-flow: column;
+  padding: 10px;
+  background-color: #29BDC5;
+  border-radius: 25px;
+  border: none;
+}
+
+.dropbox {
+  background-color: #29BDC5;
+  height: 60px;
+  width: 478px;
+  border-radius: 30px;
+}
+
+.dropbox-text {
+  font-size: 12px;
+  text-align: center;
+  padding: 24px;
+  width: 439px;
+}
 .upload-button {
+  margin: 5px 40%;
   height: 25px;
   width: 70px;
   border: none;
@@ -155,12 +183,6 @@ table {
   background-color: #29BDC5;
 }
 
-.upload-text {
-  margin: auto 5px;
-  text-align: center;
-  height: 25px;
-  width: 150px;
-  border: none;
-  border-radius: 12.5px;
-  background-color: #29BDC5;
+.list {
+  font-size: 2rem;
 }

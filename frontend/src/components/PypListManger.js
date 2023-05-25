@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 function getStoredPyps() {
 
   // get the stored pyps from local storage
+  // here is the function that will pull pyps from database
   const rawPyps = window.localStorage.getItem("pyps");
   if (rawPyps != null) {
     return JSON.parse(rawPyps);
@@ -15,6 +16,7 @@ function getStoredPyps() {
 }
 
 // store the pyp in local storage
+// here is the function that will push pyps to database
 function setStoredPyp(newPyp) {
   window.localStorage.setItem("pyps", JSON.stringify(newPyp));
 }
@@ -27,7 +29,10 @@ export default function PypListManager() {
   // uploadPyp is the state variable that holds the pyp to be uploaded
   const [uploadPyp, setUploadPyp] = useState({
       courseCode: "",
-      pypName: ""
+      pypYear: "",
+      semester: "",
+      type: "",
+      file: []
     });
 
   // update the state of pyp to be uploaded
@@ -44,33 +49,37 @@ export default function PypListManager() {
       event.preventDefault();
       setPyp([{
         courseCode : uploadPyp.courseCode,
-        pypName : uploadPyp.pypName
+        pypYear : uploadPyp.pypYear,
+        semester : uploadPyp.semester,
+        type : uploadPyp.type,
+        file : uploadPyp.file
       },
         ...pyp
       ]);
       setUploadPyp({
         courseCode: "",
-        pypName: ""});
+        pypYear: "",
+        semester: "",
+        type: "",
+        file: []
+      });
   };
 
   // holds the desired course code to search for
   const [courseCode, setCourseCode] = useState("");
-
-  // execute the filtered course code
-  const [filteredCourse, setFilteredCourse] = useState("");
 
   // set the course code to be searched
   const handleSetCourseCode = (event) => {
       setCourseCode(event.target.value);
   };
 
-  // set filtered course code and reset course code input field
-  const handleSetFilteredCourse = (event) => {
-      setFilteredCourse(courseCode);
-      setCourseCode("");
+  // reset search input field
+  const handleResetCourseCode = (event) => {
+    event.preventDefault();
+    setCourseCode("");
   };
 
-  // Ensure the each time pyp is added it is stored to the local storage
+  // Ensure the each time a pyp is added it is stored to the local storage
   useEffect(() => {
       setStoredPyp(pyp);
   }, [pyp]);
@@ -79,8 +88,8 @@ export default function PypListManager() {
     <div>
       <NavBar courseCode={courseCode} 
         handleSetCourseCode={handleSetCourseCode}
-        handleSetFilteredCourse={handleSetFilteredCourse}/>
-      <SearchScreen pyp={pyp} filteredCourse={filteredCourse}/>
+        handleResetCourseCode={handleResetCourseCode}/>
+      <SearchScreen pyp={pyp} courseCode={courseCode}/>
       <UploadScreen 
         uploadPyp={uploadPyp}
         handleUploadPyp={handleUploadPyp} 
