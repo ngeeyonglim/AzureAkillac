@@ -31,6 +31,7 @@ export default function PypListManager() {
       courseCode: "",
       pypYear: "",
       semester: "",
+      midorFinals: "",
       type: "",
       file: []
     });
@@ -51,6 +52,7 @@ export default function PypListManager() {
         courseCode : uploadPyp.courseCode,
         pypYear : uploadPyp.pypYear,
         semester : uploadPyp.semester,
+        midorFinals : uploadPyp.midorFinals,
         type : uploadPyp.type,
         file : uploadPyp.file
       },

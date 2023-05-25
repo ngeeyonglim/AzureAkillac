@@ -8,6 +8,7 @@ export default function PypList({pyp}) {
                     <th>Course</th>
                     <th>Year</th>
                     <th>Semester</th>
+                    <th>Midterms/Finals</th>
                     <th>Qns/Ans</th>
                 </tr>
             </thead>
@@ -18,6 +19,7 @@ export default function PypList({pyp}) {
                         <td>{pyp.courseCode}</td>
                         <td>{pyp.pypYear}</td>
                         <td>{pyp.semester}</td>
+                        <td>{pyp.midorFinals}</td>
                         <td>{pyp.type}</td>
                     </tr> 
                 );

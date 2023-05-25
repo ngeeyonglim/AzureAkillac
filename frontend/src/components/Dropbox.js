@@ -1,7 +1,7 @@
 import { useDropzone } from "react-dropzone";
 import { useState, useEffect } from "react";
 
-export default function DropBox({ uploadPyp}) {
+export default function DropBox({ uploadPyp }) {
   const [file, setFile] = useState([]);
   const {getRootProps, getInputProps} = useDropzone({
     multiple: false,
@@ -15,6 +15,7 @@ export default function DropBox({ uploadPyp}) {
   // update file attribute of uploadPyp each time file is dropped
   useEffect(() => {
     uploadPyp.file = file;
+    // eslint-disable-next-line
   }, [file]);
 
   return (

@@ -3,7 +3,7 @@ import DropBox from "./Dropbox";
 export default function UploadScreen({uploadPyp, handleUploadPyp, handleSetPyp}) {
     return (
     <form className="upload-form">
-        <legend>Course</legend>
+        <legend className="form-label">Course</legend>
         <input type="text" 
             placeholder="CourseCode" 
             value={uploadPyp.courseCode}
@@ -11,7 +11,7 @@ export default function UploadScreen({uploadPyp, handleUploadPyp, handleSetPyp})
             name="courseCode"
             className="upload-input"></input>
         <br />
-        <legend>Year</legend>
+        <legend className="form-label">Year</legend>
         <input type="text" 
             placeholder="yy / yy" 
             value={uploadPyp.pypYear}
@@ -19,16 +19,16 @@ export default function UploadScreen({uploadPyp, handleUploadPyp, handleSetPyp})
             name="pypYear"
             className="upload-input"></input>
         <br />
-        <legend>Semester</legend>
+        <legend className="form-label">Semester</legend>
         <fieldset className="upload-sem">
-            <label className="form-label">Semester 1</label>
+            <label className="option-label">Semester 1</label>
             <input 
                 type="radio"
                 name="semester"
                 value="Sem1"
                 checked={uploadPyp.semester === "Sem1"}
                 onChange={handleUploadPyp} />
-            <label className="form-label">Semester 2</label>
+            <label className="option-label">Semester 2</label>
             <input 
                 type="radio"
                 name="semester"
@@ -37,9 +37,27 @@ export default function UploadScreen({uploadPyp, handleUploadPyp, handleSetPyp})
                 onChange={handleUploadPyp} />
         </fieldset>
         <br />
-        <legend>Questions/Answers</legend>
+        <legend className="form-label">Midterms / Finals</legend>
+        <fieldset className="upload-sem">
+            <label className="option-label">Midterms</label>
+            <input 
+                type="radio"
+                name="midorFinals"
+                value="Midterms"
+                checked={uploadPyp.midorFinals === "Midterms"}
+                onChange={handleUploadPyp} />
+            <label className="option-label">Finals</label>
+            <input 
+                type="radio"
+                name="midorFinals"
+                value="Finals"
+                checked={uploadPyp.midorFinals === "Finals"}
+                onChange={handleUploadPyp} />
+        </fieldset>
+        <br />
+        <legend className="form-label">Questions / Answers</legend>
         <fieldset className="upload-qna">
-            <label className="form-label">Questions</label>
+            <label className="option-label">Questions</label>
             <input 
                 type="radio"
                 name="type"
@@ -47,7 +65,7 @@ export default function UploadScreen({uploadPyp, handleUploadPyp, handleSetPyp})
                 checked={uploadPyp.type === "Question"}
                 onChange={handleUploadPyp} 
                 />
-            <label className="form-label">Answers</label>
+            <label className="option-label">Answers</label>
             <input 
                 type="radio"
                 name="type"
