@@ -1,3 +1,3 @@
 export default function EmptyList() {
-    return <p className="list">No results found</p>;
+    return <p className="emptylist">No results found</p>;
 }

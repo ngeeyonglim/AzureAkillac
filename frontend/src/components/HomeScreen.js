@@ -1,10 +1,17 @@
+import CourseTab from "./CourseTab";
 import NavBar from "./NavBar";
+import NewsFeed from "./NewsFeed";
+import ProfileTab from "./ProfileTab";
+import WelcomeBackBanner from "./WelcomeBackBanner";
 
 export default function HomeScreen() {
     return (
-        <div>
+        <div className="homepage">
             <NavBar />
-            <h1>Hello User!</h1>
+            <WelcomeBackBanner />
+            <ProfileTab />
+            <NewsFeed />
+            <CourseTab />
         </div>
     );
 }

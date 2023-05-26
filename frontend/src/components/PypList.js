@@ -1,3 +1,5 @@
+import Card from "./Card";
+
 export default function PypList({pyp}) {
     return (
         <div className="list">
@@ -5,22 +7,14 @@ export default function PypList({pyp}) {
         <table>
             <thead>
                 <tr>
-                    <th>Course</th>
-                    <th>Year</th>
-                    <th>Semester</th>
-                    <th>Midterms/Finals</th>
-                    <th>Qns/Ans</th>
+                    <th>{pyp.length} Papers Found</th>
                 </tr>
             </thead>
             <tbody>
                 {pyp.map((pyp, i) =>  {
                     return (
                     <tr key={i}>
-                        <td>{pyp.courseCode}</td>
-                        <td>{pyp.pypYear}</td>
-                        <td>{pyp.semester}</td>
-                        <td>{pyp.midorFinals}</td>
-                        <td>{pyp.type}</td>
+                        <Card pyp={pyp} />
                     </tr> 
                 );
             })}

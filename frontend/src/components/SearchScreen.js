@@ -7,9 +7,7 @@ export default function SearchScreen() {
     const pyp = usePypList();
     const { courseCode } = useFilteredCourseCode();
     const filteredPyp = pyp.filter((pyp) => 
-        courseCode.toLowerCase() === pyp.courseCode
-                                            .slice(0, courseCode.length)
-                                            .toLowerCase());
+        pyp.courseCode.toLowerCase().includes(courseCode));
                                             
     return (
         <div>
