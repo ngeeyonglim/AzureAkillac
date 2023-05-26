@@ -70,4 +70,5 @@ Tech Stack
 Development plan
 
 3rd week of May: Finalized pitch for Orbital Lift-off, Pick up necessary technologies - HTML, CSS, Javascript, Python, SQL
+
 4th week of May: Created Mockup, and Proof of concept
