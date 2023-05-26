@@ -94,6 +94,19 @@ table {
   cursor: pointer;
 }
 
+.upload-logo {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  margin-right: 500px;
+  margin-top: 12px;
+  height: 50px;
+  width: 50px;
+  border: none;
+  background-color: #d9d9d9;
+  color: black;
+}
+
 .header {
   padding: 10px;
   position: absolute;
@@ -132,17 +145,15 @@ table {
 
 .upload-form {
   position:absolute;
-  right: 0%;
   top: 10%;
-  margin: 10px;
+  left: 35%;
   display: grid;
+  font-size: 24px;
 }
 
-.form-label {
-  margin: 2px;
-}
 .upload-input {
   text-align: center;
+  font-size: inherit;
   height: 33px;
   width: 476px;
   border: none;
@@ -150,29 +161,30 @@ table {
   background-color: #29BDC5;
 }
 
-.option-label {
-  margin-left: 55px;
-  width: 80px;
+
+.upload-fieldset {
+  background-color: #29BDC5;
+  border: none;
+  height: 25px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.upload-qna , .upload-sem {
-  display: grid;
-  grid-auto-flow: column;
-  padding: 10px;
-  background-color: #29BDC5;
-  border-radius: 25px;
-  border: none;
+.option-label {
+  margin-left: 25px;
 }
 
 .dropbox {
   background-color: #29BDC5;
-  height: 60px;
+  height: 100px;
   width: 478px;
-  border-radius: 30px;
+  border-radius: 25px;
+  margin-bottom: 10px;
 }
 
 .dropbox-text {
-  font-size: 12px;
+  font-size: inherit;
   text-align: center;
   padding: 24px;
   width: 439px;

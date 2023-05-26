@@ -1,8 +1,11 @@
 import { supabase } from "../supabase";
 import { Link } from "react-router-dom";
+import { useFilteredCourseCode } from "./PypListContext";
 
-export default function NavBar({courseCode, handleSetCourseCode, handleResetCourseCode}) {
-
+export default function NavBar() {
+    const {courseCode, 
+        handleSetCourseCode, 
+        handleResetCourseCode} = useFilteredCourseCode();
     // Logs out the user    
     const handleLogOutClick = () => {
         supabase.auth.signOut();
@@ -21,11 +24,17 @@ export default function NavBar({courseCode, handleSetCourseCode, handleResetCour
                 {/* Search bar that links to the search page */}
                 <li><Link to="/search">
                     <input type="text" 
-                    value={courseCode}
-                    onChange={handleSetCourseCode}
-                    onClick={handleResetCourseCode}
-                    className="search-bar" 
-                    placeholder="Search Courses"></input>
+                        value={courseCode}
+                        onChange={handleSetCourseCode}
+                        onClick={handleResetCourseCode}
+                        className="search-bar" 
+                        placeholder="Search Courses"></input>
+                 </Link></li>
+                {/* upload button that links to the upload page */}
+                <li><Link to="/upload">
+                    <img alt="upload"
+                    src={require("../images/upload-logo.png")}
+                    className="upload-logo"/>
                  </Link></li>
             </ul>
         </nav>
