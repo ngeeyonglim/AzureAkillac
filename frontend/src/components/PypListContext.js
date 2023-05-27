@@ -28,7 +28,7 @@ function getStoredPyps() {
 //   }
     JSON.parse(JSON.stringify(axios({
         method: "GET",
-        url:"/getFileName"})));
+        url:"/getFileNames"})));
     //     .then((response) => {
     //     const res =response.data
     //     setProfileData(({
