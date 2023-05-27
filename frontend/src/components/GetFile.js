@@ -7,7 +7,7 @@ export default function GetFile() {
     function getData() {
         axios({
         method: "GET",
-        url:"/profile",
+        url:"/getFileName",
         })
         .then((response) => {
         const res =response.data
@@ -22,5 +22,13 @@ export default function GetFile() {
             }
         })}
     return (
-        <div></div>)
-    }
+        <>
+        <p>To get your profile details:</p><button onClick={getData}>Click me</button>
+        {profileData && <div>
+              <p>Profile name: {profileData.profile_name}</p>
+              <p>About me: {profileData.about_me}</p>
+            </div>
+        }
+        </>
+    )
+}
