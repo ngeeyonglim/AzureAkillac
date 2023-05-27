@@ -8,6 +8,7 @@ app = Flask(__name__)
 class FBconnection:
   def __init__(self):
     # Initialize Firebase Admin SDK
+
     cred = credentials.Certificate('serviceAccountKey.json')
     self.app = firebase_admin.initialize_app(cred, {
         'storageBucket': 'akillac-f1499.appspot.com'
@@ -67,6 +68,7 @@ class FBconnection:
     response = make_response(file_content)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = f'attachment; filename={destination_path}'
+
 
 
     return response
