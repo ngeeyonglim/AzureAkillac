@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, createContext } from "react";
+import axios from "axios";
 
 const PypListContext = createContext();
 const PypListUpdateContext = createContext();
@@ -19,12 +20,27 @@ export function useFilteredCourseCode() {
 // get the stored pyps from local storage
 // here is the function that will pull pyps from database
 function getStoredPyps() {
-  const rawPyps = window.localStorage.getItem("pyps");
-  if (rawPyps != null) {
-    return JSON.parse(rawPyps);
-  } else {
-    return [];
-  }
+//   const rawPyps = window.localStorage.getItem("pyps");
+//   if (rawPyps != null) {
+//     return JSON.parse(rawPyps);
+//   } else {
+//     return [];
+//   }
+    JSON.parse(JSON.stringify(axios({
+        method: "GET",
+        url:"/getFileName"})));
+    //     .then((response) => {
+    //     const res =response.data
+    //     setProfileData(({
+    //         profile_name: res.courseCode,
+    //         about_me: res.about}))
+    //     }).catch((error) => {
+    //     if (error.response) {
+    //         console.log(error.response)
+    //         console.log(error.response.status)
+    //         console.log(error.response.headers)
+    //     }
+    // })
 }
 
 // store the pyp in local storage

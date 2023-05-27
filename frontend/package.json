@@ -21,6 +21,8 @@
     "axios": "^1.4.0",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
+    "firebase": "^9.22.1",
+    "flask": "^0.2.10",
     "immer": "^9.0.19",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
