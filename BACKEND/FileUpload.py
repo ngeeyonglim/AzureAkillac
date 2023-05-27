@@ -1,6 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, storage
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response, request
 import json
 
 app = Flask(__name__)
@@ -8,7 +8,8 @@ app = Flask(__name__)
 class FBconnection:
   def __init__(self):
     # Initialize Firebase Admin SDK
-    cred = credentials.Certificate('path/to/serviceAccountKey.json')
+
+    cred = credentials.Certificate('serviceAccountKey.json')
     self.app = firebase_admin.initialize_app(cred, {
         'storageBucket': 'akillac-f1499.appspot.com'
     })
@@ -35,6 +36,9 @@ class FBconnection:
   def upload_file_from_Flask(src_file, module_code, year, sem, ans_qns):
     #Need to send a request with the key 'pdf file' hosting the pdf file (through form submission)
     pdf_file = request.files['pdf_file']
+
+    bucket = storage.bucket()
+
     if pdf_file:
         # Upload the PDF file to Firebase Storage directly from memory
         destination_path = f'{module_code}_{year}Sem{sem}{ans_qns}'
@@ -63,7 +67,8 @@ class FBconnection:
     # Create a Flask response with the file content
     response = make_response(file_content)
     response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = f'attachment; filename={file_name}'
+    response.headers['Content-Disposition'] = f'attachment; filename={destination_path}'
+
 
 
     return response
