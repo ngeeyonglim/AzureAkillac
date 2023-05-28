@@ -16,15 +16,9 @@ export function useFilteredCourseCode() {
     return useContext(FilteredCourseCodeContext);
 }
 
-// get the stored pyps from local storage
-// here is the function that will pull pyps from database
-function getStoredPyps() {
-  return [{courseCode: "CS2040S", pypYear: "2019", semester: "sem1", midOrFinals: "Fin", ansOrQuestions: "Answers"}];
-}
-
 export function PypListProvider({ children }) {
     // pyp is the state variable that holds the array of pyps
-    const [pyp, setPyp] = useState(getStoredPyps());
+    const [pyp, setPyp] = useState([]);
 
     // uploadPyp is the state variable that holds the pyp to be uploaded
     const [uploadPyp, setUploadPyp] = useState({
