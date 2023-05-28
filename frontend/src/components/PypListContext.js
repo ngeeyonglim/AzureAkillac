@@ -19,15 +19,8 @@ export function useFilteredCourseCode() {
 
 // get the stored pyps from local storage
 // here is the function that will pull pyps from database
-async function getStoredPyps() {
-  return [{"courseCode": "CS2040S", "pypYear": "2019", "semester": "1", "midOrFinals": "Fin", "ansOrQuestions": "Answers"}, {"courseCode": "CS2040S", "pypYear": "2021", "semester": "2", "midOrFinals": "Fin", "ansOrQuestions": "Answers"}, {"courseCode": "CS2040S", "pypYear": "2022", "semester": "2", "midOrFinals": "Fin", "ansOrQuestions": "Answers"}]
-  }
-
-
-// store the pyp in local storage
-// here is the function that will push pyps to database
-function setStoredPyp(newPyp) {
-  window.localStorage.setItem("pyps", JSON.stringify(newPyp));
+function getStoredPyps() {
+  return [{courseCode: "CS2040S", pypYear: "2019", semester: "sem1", midOrFinals: "Fin", ansOrQuestions: "Answers"}];
 }
 
 export function PypListProvider({ children }) {
@@ -90,10 +83,15 @@ export function PypListProvider({ children }) {
         setCourseCode("");
     };
 
-    // Ensure the each time a pyp is added it is stored to the local storage
     useEffect(() => {
-        setStoredPyp(pyp);
-    }, [pyp]);
+        fetch("http://127.0.0.1:5000/getFileNames").then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+        }).then((data) => {
+            setPyp(data);
+        });
+    }, []);
 
     return (
         <PypListContext.Provider value={pyp}>

@@ -48,15 +48,15 @@ export default function UploadScreen() {
                     <input 
                         type="radio"
                         name="midOrFinals"
-                        value="Midterms"
-                        checked={uploadPyp.midOrFinals === "Midterms"}
+                        value="Mid"
+                        checked={uploadPyp.midOrFinals === "Mid"}
                         onChange={handleUploadPyp} />
                     <label className="option-label">Finals</label>
                     <input 
                         type="radio"
                         name="midOrFinals"
-                        value="Finals"
-                        checked={uploadPyp.midOrFinals === "Finals"}
+                        value="Fin"
+                        checked={uploadPyp.midOrFinals === "Fin"}
                         onChange={handleUploadPyp} />
                 </fieldset>
                 <br />

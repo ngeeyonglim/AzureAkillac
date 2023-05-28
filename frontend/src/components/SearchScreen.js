@@ -6,14 +6,14 @@ import { usePypList, useFilteredCourseCode } from "./PypListContext";
 export default function SearchScreen() {
     const pyp = usePypList();
     const { courseCode } = useFilteredCourseCode();
-    const filteredPyp = pyp.filter((pyp) => 
-        pyp.courseCode.toLowerCase().includes(courseCode));
-                                            
+    const filteredPyp = pyp;
+                         
+    console.log(filteredPyp);
     return (
         <div>
             <NavBar />
             {filteredPyp.length > 0 
-            ? <PypList pyp={filteredPyp} /> 
+            ? <PypList pyp={pyp} /> 
             : <EmptyList />}
         </div>
     );
