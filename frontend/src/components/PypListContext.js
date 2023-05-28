@@ -19,29 +19,10 @@ export function useFilteredCourseCode() {
 
 // get the stored pyps from local storage
 // here is the function that will pull pyps from database
-function getStoredPyps() {
-//   const rawPyps = window.localStorage.getItem("pyps");
-//   if (rawPyps != null) {
-//     return JSON.parse(rawPyps);
-//   } else {
-//     return [];
-//   }
-    JSON.parse(JSON.stringify(axios({
-        method: "GET",
-        url:"/getFileNames"})));
-    //     .then((response) => {
-    //     const res =response.data
-    //     setProfileData(({
-    //         profile_name: res.courseCode,
-    //         about_me: res.about}))
-    //     }).catch((error) => {
-    //     if (error.response) {
-    //         console.log(error.response)
-    //         console.log(error.response.status)
-    //         console.log(error.response.headers)
-    //     }
-    // })
-}
+async function getStoredPyps() {
+  return [{"courseCode": "CS2040S", "pypYear": "2019", "semester": "1", "midOrFinals": "Fin", "ansOrQuestions": "Answers"}, {"courseCode": "CS2040S", "pypYear": "2021", "semester": "2", "midOrFinals": "Fin", "ansOrQuestions": "Answers"}, {"courseCode": "CS2040S", "pypYear": "2022", "semester": "2", "midOrFinals": "Fin", "ansOrQuestions": "Answers"}]
+  }
+
 
 // store the pyp in local storage
 // here is the function that will push pyps to database
