@@ -1,0 +1,4 @@
+firebase-admin==5.1.0
+Flask==2.0.2
+jsonify==0.5
+Flask-Cors==3.0.10

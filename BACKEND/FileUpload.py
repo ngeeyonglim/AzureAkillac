@@ -2,8 +2,10 @@ import firebase_admin
 from firebase_admin import credentials, storage
 from flask import Flask, jsonify, make_response, request
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 class FBconnection:
   def __init__(self):
@@ -13,7 +15,6 @@ class FBconnection:
     self.app = firebase_admin.initialize_app(cred, {
         'storageBucket': 'akillac-f1499.appspot.com'
     })
-
     # Get a reference to the default Firebase Storage bucket
     self.bucket = storage.bucket(app=self.app)
 
@@ -62,7 +63,7 @@ class FBconnection:
 
     # Upload the file to Firebase Storage
     blob = bucket.blob(destination_path)
-    file_content = blob.download_as_bytes()
+    file_content = blob.download_to_file()
 
     # Create a Flask response with the file content
     response = make_response(file_content)
@@ -120,8 +121,8 @@ class FBconnection:
           next_file['ansOrQuestions'] = parts[1][11:].split('.')[0]
           files.append(next_file)
       
-      ret = json.dumps(files)
+      response = make_response(json.dumps(files))
 
-      return ret
+      return response
 
 
