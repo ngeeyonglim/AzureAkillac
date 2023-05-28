@@ -64,11 +64,23 @@ Features to be completed by the mid of July:
 
 Tech Stack
 
-1. HTML/CSS/Javascript
-2. Python/SQL
+1. HTML/CSS/Javascript/React
+2. Python/Flask/Firebase
 
 Development plan
 
 3rd week of May: Finalized pitch for Orbital Lift-off, Pick up necessary technologies - HTML, CSS, Javascript, Python, SQL
 
 4th week of May: Created Mockup, and Proof of concept
+
+Set-up instruction
+BACKEND
+install python online
+pip install firebase-admin
+pip install flask
+
+FRONTEND
+install node.js online
+check using node -v and npm -v
+npm install react
+npm install concurrently --save-dev
