@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext, createContext } from "react";
-import axios from "axios";
 
 const PypListContext = createContext();
 const PypListUpdateContext = createContext();

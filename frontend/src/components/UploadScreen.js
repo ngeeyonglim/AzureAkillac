@@ -18,7 +18,7 @@ export default function UploadScreen() {
                 <br />
                 <legend>Year</legend>
                 <input type="text" 
-                    placeholder="yy / yy" 
+                    placeholder="yy/yy" 
                     value={uploadPyp.pypYear}
                     onChange={handleUploadPyp}
                     name="pypYear"

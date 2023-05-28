@@ -238,9 +238,12 @@ table {
 }
 .card {
   background-color: #29BDC5;
-  margin: 0.1em auto;
-  padding: 5px;
+  margin: 0.05em auto;
+  padding: 15px;
   border-radius: 2em;
+  display: flex;
+  justify-content: space-between;
+  width: 120%;
 }
 
 .emptylist {
