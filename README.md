@@ -76,11 +76,19 @@ Development plan
 Set-up instruction
 BACKEND
 install python online
+
 pip install firebase-admin
 pip install flask
+pip install CORS
+
+Alternatively, you could cd into BACKEND folder and run source venv/bin/activate 
 
 FRONTEND
 install node.js online
 check using node -v and npm -v
 npm install react
 npm install concurrently --save-dev
+
+
+To Start Web Application
+cd into frontend folder and run npm start
