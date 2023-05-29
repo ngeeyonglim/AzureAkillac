@@ -6,7 +6,7 @@ export default function Card({ pyp }) {
         ansOrQuestions} = pyp;
     return (
         <td className="card">
-            { courseCode && <p>{ courseCode }</p>}
+            { courseCode && <p className="test">{ courseCode }</p>}
             { pypYear && <p>{ pypYear }</p>}
             { semester && <p>{ semester }</p>}
             { midOrFinals && <p>{ midOrFinals }</p>}
