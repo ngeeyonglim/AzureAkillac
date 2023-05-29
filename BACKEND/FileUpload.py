@@ -34,7 +34,8 @@ bucket = storage.bucket(app=fb_app)
 #   blob.upload_from_filename(src_file_path)
 
 @app.route('/upload', methods=['POST'])
-def upload_file_from_Flask(src_file, module_code, year, sem, ans_qns):
+def upload_file_from_Flask():
+  #src_file, module_code, year, sem, ans_qns
   #Need to send a request with the key 'pdf file' hosting the pdf file (through form submission)
   pdf_file = request.files['pdf_file']
 
@@ -116,13 +117,13 @@ def get_file_names_and_paths():
         next_file = {}
         next_file['courseCode'] = parts[0]
         next_file['pypYear'] = parts[1][0:2] + '/' + parts[1][2:4]
-        next_file['semester'] = parts[1][4:13]
-        next_file['midOrFinals'] = parts[1][13:16]
+        next_file['semester'] = parts[1][4:8]
+        next_file['midOrFinals'] = parts[1][8:11]
         if next_file['midOrFinals'] == 'Fin':
            next_file['midOrFinals'] == 'Finals'
         else:
            next_file['midOrFinals'] == 'Midterms'
-        next_file['ansOrQuestions'] = parts[1][16:].split('.')[0]
+        next_file['ansOrQuestions'] = parts[1][11:].split('.')[0]
         files.append(next_file)
     
     response = make_response(json.dumps(files))
