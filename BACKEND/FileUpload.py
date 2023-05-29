@@ -33,23 +33,25 @@ bucket = storage.bucket(app=fb_app)
 #   blob = bucket.blob(destination_path)
 #   blob.upload_from_filename(src_file_path)
 
+# courseCode, pypYear, semester, midOrFinals, ansOrQuestions, file
 @app.route('/upload', methods=['POST'])
 def upload_file_from_Flask():
-  #src_file, module_code, year, sem, ans_qns
   #Need to send a request with the key 'pdf file' hosting the pdf file (through form submission)
-  pdf_file = request.files['pdf_file']
+  # pdf_file = request.files['pdf_file']
 
-  bucket = storage.bucket()
+  # bucket = storage.bucket()
 
-  if pdf_file:
-      # Upload the PDF file to Firebase Storage directly from memory
-      destination_path = f'{module_code}_{year}Sem{sem}{ans_qns}'
-      blob = bucket.blob(destination_path)
-      blob.upload_from_file(pdf_file)
+  # if pdf_file:
+  #     # Upload the PDF file to Firebase Storage directly from memory
+  #     destination_path = f'{module_code}_{year}Sem{sem}{ans_qns}'
+  #     blob = bucket.blob(destination_path)
+  #     blob.upload_from_file(pdf_file)
 
-      return 'File uploaded to Firebase Storage successfully'
-  else:
-      return 'No file uploaded'
+  #     return 'File uploaded to Firebase Storage successfully'
+  # else:
+
+  return "File not uploaded"
+  
 
 # %%
 ## TO EDIT CUrrently using flask
