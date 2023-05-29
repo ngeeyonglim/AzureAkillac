@@ -18,7 +18,7 @@ export default function UploadScreen() {
                 <br />
                 <legend>Year</legend>
                 <input type="text" 
-                    placeholder="yy/yy" 
+                    placeholder="yy yy" 
                     value={uploadPyp.pypYear}
                     onChange={handleUploadPyp}
                     name="pypYear"
@@ -30,15 +30,15 @@ export default function UploadScreen() {
                     <input 
                         type="radio"
                         name="semester"
-                        value="Sem1"
-                        checked={uploadPyp.semester === "Sem1"}
+                        value="semester1"
+                        checked={uploadPyp.semester === "semester1"}
                         onChange={handleUploadPyp} />
                     <label className="option-label">Semester 2</label>
                     <input 
                         type="radio"
                         name="semester"
-                        value="Sem2"
-                        checked={uploadPyp.semester === "Sem2"}
+                        value="semester2"
+                        checked={uploadPyp.semester === "semester2"}
                         onChange={handleUploadPyp} />
                 </fieldset>
                 <br />

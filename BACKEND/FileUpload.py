@@ -33,6 +33,7 @@ bucket = storage.bucket(app=fb_app)
 #   blob = bucket.blob(destination_path)
 #   blob.upload_from_filename(src_file_path)
 
+# courseCode, pypYear, semester, midOrFinals, ansOrQuestions, file
 @app.route('/upload', methods=['POST'])
 def upload_file_from_Flask():
   courseCode = request.form['courseCode']
@@ -42,7 +43,7 @@ def upload_file_from_Flask():
   ansOrQuestions = request.form['ansOrQuestions']
   file_url = request.form['file']
 
-  bucket = storage.bucket()
+  # bucket = storage.bucket()
 
   if file_url:
       # Upload the PDF file to Firebase Storage directly from the provided URL
@@ -50,9 +51,11 @@ def upload_file_from_Flask():
       blob = bucket.blob(destination_path)
       blob.upload_from_url(file_url)
 
-      return 'File uploaded to Firebase Storage successfully'
-  else:
-      return 'No file uploaded'
+  #     return 'File uploaded to Firebase Storage successfully'
+  # else:
+
+  return "File not uploaded"
+  
 
 # %%
 ## TO EDIT CUrrently using flask
@@ -123,9 +126,9 @@ def get_file_names_and_paths():
         next_file['semester'] = parts[1][4:8]
         next_file['midOrFinals'] = parts[1][8:11]
         if next_file['midOrFinals'] == 'Fin':
-           next_file['midOrFinals'] == 'Finals'
+           next_file['midOrFinals'] = 'Finals'
         else:
-           next_file['midOrFinals'] == 'Midterms'
+           next_file['midOrFinals'] = 'Midterms'
         next_file['ansOrQuestions'] = parts[1][11:].split('.')[0]
         files.append(next_file)
     

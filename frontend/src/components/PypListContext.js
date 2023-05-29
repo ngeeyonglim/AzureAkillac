@@ -76,8 +76,10 @@ export function PypListProvider({ children }) {
         setCourseCode("");
     };
 
+    // upon rendering homescreen fetch list of pyps from backend
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getFileNames").then((response) => {
+        fetch("http://127.0.0.1:5000/getFileNames", {method : 'GET'})
+        .then(response => {
             if (response.ok) {
                 return response.json();
             }
@@ -85,6 +87,13 @@ export function PypListProvider({ children }) {
             setPyp(data);
         });
     }, []);
+
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:5000/upload", {method : 'POST'})
+        .then(response => response.json())
+        .then((body) =>  console.log(body))
+        }, []);
 
     return (
         <PypListContext.Provider value={pyp}>
