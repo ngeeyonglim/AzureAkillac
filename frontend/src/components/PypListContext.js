@@ -89,11 +89,41 @@ export function PypListProvider({ children }) {
     }, []);
 
 
+    // useEffect(() => {
+    //     fetch("http://127.0.0.1:5000/upload", {method : 'POST'})
+    //     .then(response => response.json())
+    //     .then((body) =>  console.log(body))
+    //     }, []);
+
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/upload", {method : 'POST'})
-        .then(response => response.json())
-        .then((body) =>  console.log(body))
-        }, []);
+        const uploadFile = async () => {
+        const formData = new FormData();
+        formData.append('courseCode', pyp[0].courseCode);
+        formData.append('pypYear', pyp[0].pypYear);
+        formData.append('semester', pyp[0].semester);
+        formData.append('midOrFinals', pyp[0].midOrFinals);
+        formData.append('ansOrQuestions', pyp[0].ansOrQuestions);
+        formData.append('file', pyp[0].file);
+
+        try {
+            const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData,
+            });
+
+            if (response.ok) {
+            // File uploaded successfully
+            console.log('File uploaded successfully');
+            } else {
+            // Handle error response
+            console.error('Error uploading file');
+            }
+        } catch (error) {
+            // Handle network error
+            console.error('Network error:', error);
+        }
+        };
+    }, [pyp]);
 
     return (
         <PypListContext.Provider value={pyp}>
