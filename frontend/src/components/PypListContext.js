@@ -102,7 +102,7 @@ export function PypListProvider({ children }) {
         formData.append('pypYear', pyp[0].pypYear);
         formData.append('semester', pyp[0].semester);
         formData.append('midOrFinals', pyp[0].midOrFinals);
-        formData.append('ansOrQuestions', pyp[0]ansOrQuestions);
+        formData.append('ansOrQuestions', pyp[0].ansOrQuestions);
         formData.append('file', pyp[0].file);
 
         try {
