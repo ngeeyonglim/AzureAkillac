@@ -74,13 +74,16 @@ Development plan
 4th week of May: Created Mockup, and Proof of concept
 
 Set-up instruction
+
 BACKEND
-install python online
-pip install firebase-admin
-pip install flask
+
+1. install python online
+2. pip install firebase-admin
+3. pip install flask
 
 FRONTEND
-install node.js online
-check using node -v and npm -v
-npm install react
-npm install concurrently --save-dev
+
+1. install node.js online
+2. check using node -v and npm -v
+3. npm install react
+4. npm install concurrently --save-dev
