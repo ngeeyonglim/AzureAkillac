@@ -23,7 +23,8 @@ export function PypListProvider({ children }) {
     // uploadPyp is the state variable that holds the pyp to be uploaded
     const [uploadPyp, setUploadPyp] = useState({
         courseCode: "",
-        pypYear: "",
+        pypYear1: "",
+        pyppYear2: "",
         semester: "",
         midOrFinals: "",
         ansOrQuestions: "",
@@ -45,7 +46,7 @@ export function PypListProvider({ children }) {
         event.preventDefault();
         setPyp([{
             courseCode : uploadPyp.courseCode,
-            pypYear : uploadPyp.pypYear,
+            pypYear : uploadPyp.pypYear1 + uploadPyp.pypYear2,
             semester : uploadPyp.semester,
             midOrFinals : uploadPyp.midOrFinals,
             ansOrQuestions : uploadPyp.ansOrQuestions,
@@ -55,7 +56,8 @@ export function PypListProvider({ children }) {
         ]);
         setUploadPyp({
             courseCode: "",
-            pypYear: "",
+            pypYear1: "",
+            pypYear2: "",
             semester: "",
             midOrFinals: "",
             ansOrQuestions: "",

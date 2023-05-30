@@ -189,6 +189,16 @@
   border: none;
   border-radius: 20px;
   background-color: #29BDC5;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.upload-year {
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  font-size: inherit;
+  width: 100px;
 }
 
 .upload-fieldset {
