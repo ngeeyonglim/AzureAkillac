@@ -38,6 +38,7 @@ export function PypListProvider({ children }) {
             ...uploadPyp,
             [name] : value
         });
+        console.log(uploadPyp);
     };
 
     // check if the pyp to be uploaded is valid
@@ -46,7 +47,8 @@ export function PypListProvider({ children }) {
         pyp.pypYear1 && 
         parseInt(pyp.pypYear2) - 1 === parseInt(pyp.pypYear1) && 
         pyp.semester && pyp.midOrFinals && 
-        pyp.ansOrQuestions && pyp.file.length > 0;
+        pyp.ansOrQuestions;
+        // && pyp.file.length > 0;
     }
     
     // appends pyp to the front of the array 
@@ -64,19 +66,22 @@ export function PypListProvider({ children }) {
                 formData.append('midOrFinals', uploadPyp.midOrFinals);
                 formData.append('ansOrQuestions', uploadPyp.ansOrQuestions);
                 formData.append('file', uploadPyp.file);
+                for (var key of formData.entries()) {
+                    console.log(key[0] + ', ' + key[1]);
+                }
 
                 try {
                     const response = await fetch('http://127.0.0.1:5000/upload', {
-                    method: 'POST',
-                    body: formData,
+                        method: 'POST',
+                        body: formData,
                     });
 
                     if (response.ok) {
-                    // File uploaded successfully
-                    console.log('File uploaded successfully');
+                        // File uploaded successfully
+                        console.log('File uploaded successfully');
                     } else {
-                    // Handle error response
-                    console.error('Error uploading file');
+                        // Handle error response
+                        console.error('Error uploading file');
                     }
                 } catch (error) {
                     // Handle network error

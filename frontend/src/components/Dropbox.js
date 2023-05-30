@@ -4,17 +4,17 @@ import { useState, useEffect } from "react";
 export default function DropBox({ uploadPyp }) {
   const [file, setFile] = useState([]);
   const {getRootProps, getInputProps} = useDropzone({
+    type: "file/*",
     multiple: false,
     onDrop: acceptedFiles => { 
-      setFile(acceptedFiles.map(file => Object.assign(file, {
-        preview: URL.createObjectURL(file)
-      })));
+      setFile(acceptedFiles);
     }
   });
   
   // update file attribute of uploadPyp each time file is dropped
   useEffect(() => {
     uploadPyp.file = file;
+    console.log(file);
     // eslint-disable-next-line
   }, [file]);
 

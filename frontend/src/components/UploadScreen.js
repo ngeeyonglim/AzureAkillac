@@ -83,7 +83,7 @@ export default function UploadScreen() {
                         onChange={handleUploadPyp} />
                 </fieldset>
                 <br />
-                <DropBox uploadPyp={uploadPyp} handleUploadPyp={handleUploadPyp}/>
+                <DropBox uploadPyp={uploadPyp} />
                 <button type="submit" 
                     onClick={handleSetPyps} 
                     className="upload-button">

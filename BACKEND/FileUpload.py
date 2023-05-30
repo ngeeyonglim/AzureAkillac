@@ -3,6 +3,7 @@ from firebase_admin import credentials, storage
 from flask import Flask, jsonify, make_response, request
 import json
 from flask_cors import CORS
+import requests
 
 
 #Initialize flask app
@@ -41,20 +42,32 @@ def upload_file_from_Flask():
   semester = request.form['semester']
   midOrFinals = request.form['midOrFinals']
   ansOrQuestions = request.form['ansOrQuestions']
-  file_url = request.form['file']
+  file_url = request.files['file']
 
   # bucket = storage.bucket()
 
   if file_url:
-      # Upload the PDF file to Firebase Storage directly from the provided URL
-      destination_path = f'{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
-      blob = bucket.blob(destination_path)
-      blob.upload_from_url(file_url)
+  #       r = requests.get(file_url)
+        
+  #       if r.status == 200:
+  #           pdf_data = r.data
+            
+  #           # Upload the PDF file to Firebase Storage
+  #           destination_path = f'{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
+  #           bucket = storage.bucket()
+  #           blob = bucket.blob(destination_path)
+  #           blob.upload_from_string(pdf_data, content_type='application/pdf')
 
-  #     return 'File uploaded to Firebase Storage successfully'
+  #           return 'File uploaded to Firebase Storage successfully'
+  #       else:
+  #           return 'Failed to retrieve the file from the provided URL'
   # else:
-
-  return "File not uploaded"
+  #       return 'File URL not provided'
+    destination_path = f'{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
+    bucket = storage.bucket()
+    blob = bucket.blob(destination_path)
+    blob.upload_from_file(file_url)
+    return 'hi'
   
 
 # %%
