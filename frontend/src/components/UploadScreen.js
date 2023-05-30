@@ -30,15 +30,15 @@ export default function UploadScreen() {
                     <input 
                         type="radio"
                         name="semester"
-                        value="semester1"
-                        checked={uploadPyp.semester === "semester1"}
+                        value="Sem1"
+                        checked={uploadPyp.semester === "Sem1"}
                         onChange={handleUploadPyp} />
                     <label className="option-label">Semester 2</label>
                     <input 
                         type="radio"
                         name="semester"
-                        value="semester2"
-                        checked={uploadPyp.semester === "semester2"}
+                        value="Sem2"
+                        checked={uploadPyp.semester === "Sem2"}
                         onChange={handleUploadPyp} />
                 </fieldset>
                 <br />
@@ -66,15 +66,15 @@ export default function UploadScreen() {
                     <input 
                         type="radio"
                         name="ansOrQuestions"
-                        value= "Question"
-                        checked={uploadPyp.ansOrQuestions === "Question"}
+                        value= "Questions"
+                        checked={uploadPyp.ansOrQuestions === "Questions"}
                         onChange={handleUploadPyp} />
                     <label className="option-label">Answers</label>
                     <input 
                         type="radio"
                         name="ansOrQuestions"
-                        value= "Answer"
-                        checked={uploadPyp.ansOrQuestions === "Answer"}
+                        value= "Answers"
+                        checked={uploadPyp.ansOrQuestions === "Answers"}
                         onChange={handleUploadPyp} />
                 </fieldset>
                 <br />

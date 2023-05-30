@@ -88,13 +88,6 @@ export function PypListProvider({ children }) {
         });
     }, []);
 
-
-    // useEffect(() => {
-    //     fetch("http://127.0.0.1:5000/upload", {method : 'POST'})
-    //     .then(response => response.json())
-    //     .then((body) =>  console.log(body))
-    //     }, []);
-
     useEffect(() => {
         const uploadFile = async () => {
         const formData = new FormData();
@@ -122,7 +115,8 @@ export function PypListProvider({ children }) {
             // Handle network error
             console.error('Network error:', error);
         }
-        };
+    };
+    uploadFile();
     }, [pyp]);
 
     return (

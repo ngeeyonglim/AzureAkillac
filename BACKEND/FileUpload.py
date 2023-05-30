@@ -122,7 +122,7 @@ def get_file_names_and_paths():
         parts =  file_name.split('_')
         next_file = {}
         next_file['courseCode'] = parts[0]
-        next_file['pypYear'] = parts[1][0:2] + '/' + parts[1][2:4]
+        next_file['pypYear'] = parts[1][0:4]
         next_file['semester'] = parts[1][4:8]
         next_file['midOrFinals'] = parts[1][8:11]
         if next_file['midOrFinals'] == 'Fin':

@@ -6,10 +6,10 @@ export default function Card({ pyp }) {
         ansOrQuestions} = pyp;
     return (
         <td className="card">
-            { courseCode && <p className="test">{ courseCode }</p>}
-            { pypYear && <p>{ pypYear }</p>}
-            { semester && <p>{ semester }</p>}
-            { midOrFinals && <p>{ midOrFinals }</p>}
+            <p>{ courseCode }</p>
+            <p>{ pypYear.slice(0,2)}/{pypYear.slice(2,4)}</p>
+            <p>{ semester }</p>
+            { midOrFinals === "Mid" ? <p>Midterms</p> : <p>Finals</p>}
             { ansOrQuestions && <p>{ ansOrQuestions }</p>}
         </td>
     )
