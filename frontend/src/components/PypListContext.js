@@ -43,7 +43,8 @@ export function PypListProvider({ children }) {
     // check if the pyp to be uploaded is valid
     function isValidUpload(pyp) {
         return pyp.courseCode && 
-        pyp.pypYear1 && pyp.pypYear2 && 
+        pyp.pypYear1 && 
+        parseInt(pyp.pypYear2) - 1 === parseInt(pyp.pypYear1) && 
         pyp.semester && pyp.midOrFinals && 
         pyp.ansOrQuestions && pyp.file.length > 0;
     }

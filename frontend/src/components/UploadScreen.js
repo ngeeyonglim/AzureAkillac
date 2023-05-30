@@ -15,24 +15,21 @@ export default function UploadScreen() {
                     onChange={handleUploadPyp}
                     name="courseCode"
                     className="upload-input"></input>
-                <legend>Year</legend>
+                <legend className="upload-legend">Year</legend>
                 <div className="upload-input">
-                <input type="number" 
-                    placeholder="yy" 
-                    value={uploadPyp.pypYear1}
-                    onChange={handleUploadPyp}
-                    name="pypYear1"
-                    className="upload-year"
-                    maxLength={2}></input>
-                <p>/</p>
-                <input type="number" 
-                    placeholder="yy" 
-                    value={uploadPyp.pypYear2}
-                    onChange={handleUploadPyp}
-                    name="pypYear2"
-                    className="upload-year"
-                    maxLength={2}
-                    ></input>
+                    <input type="number" 
+                        placeholder="yy" 
+                        value={uploadPyp.pypYear1}
+                        onChange={handleUploadPyp}
+                        name="pypYear1"
+                        className="upload-year"></input>
+                    <p>/</p>
+                    <input type="number" 
+                        placeholder="yy" 
+                        value={uploadPyp.pypYear2}
+                        onChange={handleUploadPyp}
+                        name="pypYear2"
+                        className="upload-year"></input>
                 </div>
                 <legend className="upload-legend">Semester</legend>
                 <fieldset className="upload-fieldset">
