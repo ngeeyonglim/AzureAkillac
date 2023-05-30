@@ -18,13 +18,13 @@ export function useFilteredCourseCode() {
 
 export function PypListProvider({ children }) {
     // pyp is the state variable that holds the array of pyps
-    const [pyp, setPyp] = useState([]);
+    const [pyps, setPyps] = useState([]);
 
     // uploadPyp is the state variable that holds the pyp to be uploaded
     const [uploadPyp, setUploadPyp] = useState({
         courseCode: "",
         pypYear1: "",
-        pyppYear2: "",
+        pypYear2: "",
         semester: "",
         midOrFinals: "",
         ansOrQuestions: "",
@@ -39,30 +39,61 @@ export function PypListProvider({ children }) {
             [name] : value
         });
     };
+
+    // check if the pyp to be uploaded is valid
+    function isValidUpload(pyp) {
+        return pyp.courseCode && 
+        pyp.pypYear1 && pyp.pypYear2 && 
+        pyp.semester && pyp.midOrFinals && 
+        pyp.ansOrQuestions && pyp.file.length > 0;
+    }
     
     // appends pyp to the front of the array 
     // and resets upload input fields
-    const handleSetPyp = (event) => {
+    const handleSetPyps = (event) => {
         event.preventDefault();
-        setPyp([{
-            courseCode : uploadPyp.courseCode,
-            pypYear : uploadPyp.pypYear1 + uploadPyp.pypYear2,
-            semester : uploadPyp.semester,
-            midOrFinals : uploadPyp.midOrFinals,
-            ansOrQuestions : uploadPyp.ansOrQuestions,
-            file : uploadPyp.file
-            },
-            ...pyp
-        ]);
-        setUploadPyp({
-            courseCode: "",
-            pypYear1: "",
-            pypYear2: "",
-            semester: "",
-            midOrFinals: "",
-            ansOrQuestions: "",
-            file: []
-        });
+        if (!isValidUpload(uploadPyp)) {
+            alert("Invalid upload");
+        } else {
+            const uploadFile = async () => {
+                const formData = new FormData();
+                formData.append('courseCode', uploadPyp.courseCode);
+                formData.append('pypYear', uploadPyp.pypYear1 + uploadPyp.pypYear2);
+                formData.append('semester', uploadPyp.semester);
+                formData.append('midOrFinals', uploadPyp.midOrFinals);
+                formData.append('ansOrQuestions', uploadPyp.ansOrQuestions);
+                formData.append('file', uploadPyp.file);
+
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/upload', {
+                    method: 'POST',
+                    body: formData,
+                    });
+
+                    if (response.ok) {
+                    // File uploaded successfully
+                    console.log('File uploaded successfully');
+                    } else {
+                    // Handle error response
+                    console.error('Error uploading file');
+                    }
+                } catch (error) {
+                    // Handle network error
+                    console.error('Network error:', error);
+                }
+            };
+            uploadFile();
+            fetchPyps();
+            setUploadPyp({
+                courseCode: "",
+                pypYear1: "",
+                pypYear2: "",
+                semester: "",
+                midOrFinals: "",
+                ansOrQuestions: "",
+                file: []
+            });
+        }
     };
     // holds the desired course code to search for
     const [courseCode, setCourseCode] = useState("");
@@ -78,59 +109,33 @@ export function PypListProvider({ children }) {
         setCourseCode("");
     };
 
-    // upon rendering homescreen fetch list of pyps from backend
-    useEffect(() => {
+    // fetch list of pyps from backend
+    const fetchPyps = async () => {
         fetch("http://127.0.0.1:5000/getFileNames", {method : 'GET'})
         .then(response => {
             if (response.ok) {
                 return response.json();
             }
         }).then((data) => {
-            setPyp(data);
+            setPyps(data);
         });
+    };
+
+    // upon rendering homescreen fetch list of pyps from backend
+    useEffect(() => {
+        fetchPyps();
     }, []);
 
-    useEffect(() => {
-        const uploadFile = async () => {
-        const formData = new FormData();
-        formData.append('courseCode', pyp[0].courseCode);
-        formData.append('pypYear', pyp[0].pypYear);
-        formData.append('semester', pyp[0].semester);
-        formData.append('midOrFinals', pyp[0].midOrFinals);
-        formData.append('ansOrQuestions', pyp[0].ansOrQuestions);
-        formData.append('file', pyp[0].file);
-
-        try {
-            const response = await fetch('http://127.0.0.1:5000/upload', {
-            method: 'POST',
-            body: formData,
-            });
-
-            if (response.ok) {
-            // File uploaded successfully
-            console.log('File uploaded successfully');
-            } else {
-            // Handle error response
-            console.error('Error uploading file');
-            }
-        } catch (error) {
-            // Handle network error
-            console.error('Network error:', error);
-        }
-    };
-    uploadFile();
-    }, [pyp]);
-
     return (
-        <PypListContext.Provider value={pyp}>
+        <PypListContext.Provider value={pyps}>
             <PypListUpdateContext.Provider 
-                value={{handleSetPyp, handleUploadPyp, uploadPyp}}>
-                <FilteredCourseCodeContext.Provider 
-                    value={{courseCode, 
-                    handleSetCourseCode, 
-                    handleResetCourseCode}}>
-                    {children}
-                </FilteredCourseCodeContext.Provider>
+                value={{handleSetPyps, handleUploadPyp, uploadPyp}}>
+                    <FilteredCourseCodeContext.Provider 
+                        value={{courseCode, 
+                        handleSetCourseCode, 
+                        handleResetCourseCode}}>
+                        {children}
+                    </FilteredCourseCodeContext.Provider>
             </PypListUpdateContext.Provider>
         </PypListContext.Provider>
     );

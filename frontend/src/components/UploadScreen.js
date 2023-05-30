@@ -3,37 +3,38 @@ import NavBar from "./NavBar";
 import { useUpdatePypList } from "./PypListContext";
 
 export default function UploadScreen() {
-    const { handleSetPyp, handleUploadPyp, uploadPyp } = useUpdatePypList();
+    const { handleSetPyps, handleUploadPyp, uploadPyp } = useUpdatePypList();
     return (
         <div>
             <NavBar />
             <form className="upload-form">
-                <legend>Course</legend>
+                <legend className="upload-legend">Course</legend>
                 <input type="text" 
                     placeholder="CourseCode" 
                     value={uploadPyp.courseCode}
                     onChange={handleUploadPyp}
                     name="courseCode"
                     className="upload-input"></input>
-                <br />
                 <legend>Year</legend>
                 <div className="upload-input">
-                <input type="text" 
+                <input type="number" 
                     placeholder="yy" 
                     value={uploadPyp.pypYear1}
                     onChange={handleUploadPyp}
                     name="pypYear1"
-                    className="upload-year"></input>
+                    className="upload-year"
+                    maxLength={2}></input>
                 <p>/</p>
-                <input type="text" 
+                <input type="number" 
                     placeholder="yy" 
                     value={uploadPyp.pypYear2}
                     onChange={handleUploadPyp}
                     name="pypYear2"
-                    className="upload-year"></input>
+                    className="upload-year"
+                    maxLength={2}
+                    ></input>
                 </div>
-                <br />
-                <legend>Semester</legend>
+                <legend className="upload-legend">Semester</legend>
                 <fieldset className="upload-fieldset">
                     <label className="option-label">Semester 1</label>
                     <input 
@@ -50,8 +51,7 @@ export default function UploadScreen() {
                         checked={uploadPyp.semester === "Sem2"}
                         onChange={handleUploadPyp} />
                 </fieldset>
-                <br />
-                <legend>Midterms / Finals</legend>
+                <legend className="upload-legend">Midterms / Finals</legend>
                 <fieldset className="upload-fieldset">
                     <label className="option-label">Midterms</label>
                     <input 
@@ -68,8 +68,7 @@ export default function UploadScreen() {
                         checked={uploadPyp.midOrFinals === "Fin"}
                         onChange={handleUploadPyp} />
                 </fieldset>
-                <br />
-                <legend>Questions / Answers</legend>
+                <legend className="upload-legend">Questions / Answers</legend>
                 <fieldset className="upload-fieldset">
                     <label className="option-label">Questions</label>
                     <input 
@@ -89,7 +88,7 @@ export default function UploadScreen() {
                 <br />
                 <DropBox uploadPyp={uploadPyp} handleUploadPyp={handleUploadPyp}/>
                 <button type="submit" 
-                    onClick={handleSetPyp} 
+                    onClick={handleSetPyps} 
                     className="upload-button">
                     Upload
                 </button>
