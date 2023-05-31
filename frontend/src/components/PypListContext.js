@@ -65,7 +65,7 @@ export function PypListProvider({ children }) {
                 formData.append('semester', uploadPyp.semester);
                 formData.append('midOrFinals', uploadPyp.midOrFinals);
                 formData.append('ansOrQuestions', uploadPyp.ansOrQuestions);
-                formData.append('file', uploadPyp.file);
+                formData.append('file', uploadPyp.file[0]);
                 for (var key of formData.entries()) {
                     console.log(key[0] + ', ' + key[1]);
                 }

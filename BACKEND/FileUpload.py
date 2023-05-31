@@ -42,11 +42,11 @@ def upload_file_from_Flask():
   semester = request.form['semester']
   midOrFinals = request.form['midOrFinals']
   ansOrQuestions = request.form['ansOrQuestions']
-  file_url = request.files['file']
+  file = request.files['file']
 
   # bucket = storage.bucket()
 
-  if file_url:
+  if file:
   #       r = requests.get(file_url)
         
   #       if r.status == 200:
@@ -66,8 +66,8 @@ def upload_file_from_Flask():
     destination_path = f'{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
     bucket = storage.bucket()
     blob = bucket.blob(destination_path)
-    blob.upload_from_file(file_url)
-    return 'hi'
+    blob.upload_from_file(file, content_type = 'application/pdf')
+    return 'File Uploaded Successfully'
   
 
 # %%
