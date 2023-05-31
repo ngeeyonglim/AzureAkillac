@@ -1,5 +1,12 @@
-import { useState } from "react";
+import { useState, useContext, createContext } from "react";
 import NavBar from "./NavBar";
+import ProfilePic from "./ProfilePic";
+
+const ProfileContext = createContext();
+
+export function useProfile() {
+    return useContext(ProfileContext);
+}
 
 export default function ProfileScreen() {
     const [editMode, setEditMode] = useState(false);
@@ -7,11 +14,13 @@ export default function ProfileScreen() {
         setEditMode(!editMode);
     };
     return (
-        <div className="profilescreen">
-            <NavBar />
-            <h1>ProfileScreen</h1>
-            {editMode && <p><input type="text"></input></p>}
-            <button onClick={handleEdit} className="edit-button">Edit Profile</button>
-        </div>
+        <ProfileContext.Provider value={editMode}>
+            <div className="profilescreen">
+                <NavBar />
+                <ProfilePic />
+                {editMode ? <p>Hello</p> : <br/>}
+                <button onClick={handleEdit} className="edit-button">Edit Profile</button>
+            </div>
+        </ProfileContext.Provider>
     );
 }

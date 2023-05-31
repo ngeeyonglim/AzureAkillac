@@ -38,7 +38,6 @@ export function PypListProvider({ children }) {
             ...uploadPyp,
             [name] : value
         });
-        console.log(uploadPyp);
     };
 
     // check if the pyp to be uploaded is valid

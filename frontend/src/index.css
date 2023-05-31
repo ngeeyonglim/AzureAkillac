@@ -211,6 +211,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type=number] {
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 
@@ -276,4 +277,12 @@ table {
   width: 100%;
   padding-top: 35vh;
   font-size: 64px;
+}
+
+.profile-image {
+  margin: 50px;
+  height: 300px;
+  max-height: 300px;
+  min-width: 300px;
+  border-radius: 50%;
 }

@@ -44,25 +44,7 @@ def upload_file_from_Flask():
   ansOrQuestions = request.form['ansOrQuestions']
   file = request.files['file']
 
-  # bucket = storage.bucket()
-
   if file:
-  #       r = requests.get(file_url)
-        
-  #       if r.status == 200:
-  #           pdf_data = r.data
-            
-  #           # Upload the PDF file to Firebase Storage
-  #           destination_path = f'{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
-  #           bucket = storage.bucket()
-  #           blob = bucket.blob(destination_path)
-  #           blob.upload_from_string(pdf_data, content_type='application/pdf')
-
-  #           return 'File uploaded to Firebase Storage successfully'
-  #       else:
-  #           return 'Failed to retrieve the file from the provided URL'
-  # else:
-  #       return 'File URL not provided'
     destination_path = f'{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
     bucket = storage.bucket()
     blob = bucket.blob(destination_path)
