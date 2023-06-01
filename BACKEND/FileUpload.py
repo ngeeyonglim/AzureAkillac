@@ -4,6 +4,7 @@ from flask import Flask, jsonify, make_response, request
 import json
 from flask_cors import CORS
 import requests
+import datetime as datetime
 
 
 #Initialize flask app
@@ -65,14 +66,13 @@ def download_file(module_code, year, sem, ans_qns):
 
   # Upload the file to Firebase Storage
   blob = bucket.blob(destination_path)
-  file_content = blob.download_to_file()
+  url = blob.generate_signed_url(
+        version="v4",
+        method="GET"
+    )
 
   # Create a Flask response with the file content
-  response = make_response(file_content)
-  response.headers['Content-Type'] = 'application/pdf'
-  response.headers['Content-Disposition'] = f'attachment; filename={destination_path}'
-
-
+  response = jsonify({'file': url})
 
   return response
 
@@ -112,6 +112,11 @@ def get_file_names_and_paths():
     # Extract file names and paths from the blobs
     # Iterate over the blobs and print the file names
     for blob in blobs:
+      url = blob.generate_signed_url(
+        version="v4",
+        expiration=datetime.timedelta(minutes=15),
+        method="GET"
+      )
       if not blob.name.endswith('/'):
         file_name = blob.name
         parts =  file_name.split('_')
@@ -125,6 +130,7 @@ def get_file_names_and_paths():
         else:
            next_file['midOrFinals'] = 'Midterms'
         next_file['ansOrQuestions'] = parts[1][11:].split('.')[0]
+        next_file['file'] = url
         files.append(next_file)
     
     response = make_response(json.dumps(files))
