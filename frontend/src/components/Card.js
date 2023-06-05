@@ -13,7 +13,7 @@ export default function Card({ pyp }) {
             <p>{ semester }</p>
             {midOrFinals === "Mid" ? <p>Midterms</p> : <p>Finals</p>}
             <p>{ ansOrQuestions }</p>
-            <a href= {file} target = 'blank'>View</a>
+            <a href={file} target="blank">View</a>
         </td>
     )
 }

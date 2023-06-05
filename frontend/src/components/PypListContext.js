@@ -40,17 +40,29 @@ export function PypListProvider({ children }) {
         });
     };
 
+    // holds the desired course code to search for
+    const [courseCode, setCourseCode] = useState("");
+    
+    // set the course code to be searched
+    const handleSetCourseCode = (event) => {
+        event.preventDefault();
+        setCourseCode(event.target.value);
+    };
+    
+    // reset search input field
+    const handleResetCourseCode = (event) => {
+        setCourseCode("");
+    };
+    
     // check if the pyp to be uploaded is valid
     function isValidUpload(pyp) {
-        return pyp.courseCode && 
-        pyp.pypYear1 && 
+        return pyp.courseCode && pyp.pypYear1 && 
         parseInt(pyp.pypYear2) - 1 === parseInt(pyp.pypYear1) && 
         pyp.semester && pyp.midOrFinals && 
-        pyp.ansOrQuestions;
-        // && pyp.file.length > 0;
+        pyp.ansOrQuestions && pyp.file.length > 0;
     }
-    
-    // appends pyp to the front of the array 
+
+    // push pyp to backend and pull again to update list
     // and resets upload input fields
     const handleSetPyps = (event) => {
         event.preventDefault();
@@ -65,9 +77,6 @@ export function PypListProvider({ children }) {
                 formData.append('midOrFinals', uploadPyp.midOrFinals);
                 formData.append('ansOrQuestions', uploadPyp.ansOrQuestions);
                 formData.append('file', uploadPyp.file[0]);
-                for (var key of formData.entries()) {
-                    console.log(key[0] + ', ' + key[1]);
-                }
 
                 try {
                     const response = await fetch('http://127.0.0.1:5000/upload', {
@@ -100,19 +109,6 @@ export function PypListProvider({ children }) {
             });
         }
     };
-    // holds the desired course code to search for
-    const [courseCode, setCourseCode] = useState("");
-
-    // set the course code to be searched
-    const handleSetCourseCode = (event) => {
-        event.preventDefault();
-        setCourseCode(event.target.value);
-    };
-
-    // reset search input field
-    const handleResetCourseCode = (event) => {
-        setCourseCode("");
-    };
 
     // fetch list of pyps from backend
     const fetchPyps = async () => {
@@ -122,7 +118,6 @@ export function PypListProvider({ children }) {
                 return response.json();
             }
         }).then((data) => {
-            console.log(data)
             setPyps(data);
         });
     };

@@ -14,7 +14,6 @@ export default function DropBox({ uploadPyp }) {
   // update file attribute of uploadPyp each time file is dropped
   useEffect(() => {
     uploadPyp.file = file;
-    console.log(file);
     // eslint-disable-next-line
   }, [file]);
 

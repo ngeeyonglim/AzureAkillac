@@ -18,7 +18,6 @@ export default function ProfileScreen() {
             <div className="profilescreen">
                 <NavBar />
                 <ProfilePic />
-                {editMode ? <p>Hello</p> : <br/>}
                 <button onClick={handleEdit} className="edit-button">Edit Profile</button>
             </div>
         </ProfileContext.Provider>
