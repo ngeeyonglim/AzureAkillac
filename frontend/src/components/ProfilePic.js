@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useProfile } from "./ProfileScreen";
+import { useEdit } from "./ProfileScreen";
 import ImageCrop from "./ImageCrop";
 
 
 export default function ProfilePic() {
-    const editMode = useProfile();
+    const editMode = useEdit();
     const [profilePic, setProfilePic] = useState("");
 
     const handleImageUpload = (image) => {
