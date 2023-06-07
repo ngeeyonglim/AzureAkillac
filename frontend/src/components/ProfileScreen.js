@@ -2,10 +2,10 @@ import { useState, useContext, createContext } from "react";
 import NavBar from "./NavBar";
 import ProfilePic from "./ProfilePic";
 
-const ProfileContext = createContext();
+const EditContext = createContext();
 
-export function useProfile() {
-    return useContext(ProfileContext);
+export function useEdit() {
+    return useContext(EditContext);
 }
 
 export default function ProfileScreen() {
@@ -14,12 +14,12 @@ export default function ProfileScreen() {
         setEditMode(!editMode);
     };
     return (
-        <ProfileContext.Provider value={editMode}>
+        <EditContext.Provider value={editMode}>
             <div className="profilescreen">
                 <NavBar />
                 <ProfilePic />
                 <button onClick={handleEdit} className="edit-button">Edit Profile</button>
             </div>
-        </ProfileContext.Provider>
+        </EditContext.Provider>
     );
 }
