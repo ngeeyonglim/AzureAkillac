@@ -1,14 +1,16 @@
-import { supabase } from "../supabase";
 import { Link } from "react-router-dom";
 import { useFilteredCourseCode } from "./PypListContext";
+import { auth } from "../firebase"; // Import auth from firebase.js
+import { signOut } from "firebase/auth";
 
 export default function NavBar() {
     const {courseCode, 
         handleSetCourseCode, 
         handleResetCourseCode} = useFilteredCourseCode();
+
     // Logs out the user    
-    const handleLogOutClick = () => {
-        supabase.auth.signOut();
+    const handleLogOutClick = async () => {
+        await signOut(auth);
     };
 
     return (

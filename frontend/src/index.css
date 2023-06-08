@@ -33,10 +33,17 @@ button {
 .login-slogan {
   text-align: center;
   font-size: 32px;
+  margin-bottom: 10px;
 }
 
-.login-message {
+.login-subtitle {
   text-align: center;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.login-label {
+  font-size: 16px;
 }
 
 .login-button {
@@ -50,8 +57,10 @@ button {
 
 .login-anchor {
   color: blue;
-  display: inline-block;
   width: 300px;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
 }
 
 .login-input {
@@ -62,11 +71,6 @@ button {
   border-radius: 15px;
   background-color: #29BDC5;
   height: 30px;
-}
-
-.login-container {
-  font-size: 16px;
-  text-align: center;
 }
 
 .navbar {

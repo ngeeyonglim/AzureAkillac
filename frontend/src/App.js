@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 import { Route, Routes } from "react-router-dom";
 import LoginScreen from "./components/LoginScreen";
 import HomeScreen from "./components/HomeScreen";
@@ -14,20 +14,14 @@ export default function App() {
   const pypList = usePypList();
   const [session, setSession] = useState(null);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, (user) => {
       setSession(user);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  });
 
   const routes = [
     {
       path: "/",
-      element: session ? <HomeScreen /> : <LoginScreen auth={auth} />, // Pass auth as a prop
+      element: session ? <HomeScreen /> : <LoginScreen />,
     },
     {
       path: "/upload",
@@ -53,6 +47,7 @@ export default function App() {
 
   return (
     <div>
+
       <Routes>
         {allRoutes.map(({ path, element }) => (
           <Route key={path} path={path} element={element} />
@@ -61,4 +56,3 @@ export default function App() {
     </div>
   );
 }
-
