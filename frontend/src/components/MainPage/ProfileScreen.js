@@ -1,5 +1,5 @@
 import { useState, useContext, createContext } from "react";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 import ProfilePic from "./ProfilePic";
 
 const EditContext = createContext();

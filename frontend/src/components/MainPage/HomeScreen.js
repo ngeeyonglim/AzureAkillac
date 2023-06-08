@@ -1,5 +1,5 @@
 import CourseTab from "./CourseTab";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 import NewsFeed from "./NewsFeed";
 import ProfileTab from "./ProfileTab";
 import WelcomeBackBanner from "./WelcomeBackBanner";

@@ -1,5 +1,5 @@
 import DropBox from "./Dropbox";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 import { useUpdatePypList } from "./PypListContext";
 
 export default function UploadScreen() {

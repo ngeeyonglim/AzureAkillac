@@ -2,12 +2,12 @@ import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { Route, Routes } from "react-router-dom";
 import LoginScreen from "./components/LoginScreen";
-import HomeScreen from "./components/HomeScreen";
-import UploadScreen from "./components/UploadScreen";
-import SearchScreen from "./components/SearchScreen";
-import ProfileScreen from "./components/ProfileScreen";
-import Pyp from "./components/Pyp";
-import { usePypList } from "./components/PypListContext";
+import HomeScreen from "./components/MainPage/HomeScreen";
+import UploadScreen from "./components/Pyp/UploadScreen";
+import SearchScreen from "./components/Pyp/SearchScreen";
+import ProfileScreen from "./components/MainPage/ProfileScreen";
+import Pyp from "./components/Pyp/Pyp";
+import { usePypList } from "./components/Pyp/PypListContext";
 import { auth } from "./firebase"; // Import auth from firebase.js
 
 export default function App() {
@@ -21,7 +21,7 @@ export default function App() {
   const routes = [
     {
       path: "/",
-      element: session ? <HomeScreen /> : <LoginScreen />,
+      element: <HomeScreen />,
     },
     {
       path: "/upload",
@@ -47,12 +47,14 @@ export default function App() {
 
   return (
     <div>
-
+      {session ? (
       <Routes>
         {allRoutes.map(({ path, element }) => (
           <Route key={path} path={path} element={element} />
         ))}
-      </Routes>
+      </Routes>) : (
+        <LoginScreen />
+      )}
     </div>
   );
 }

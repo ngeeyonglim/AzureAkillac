@@ -1,5 +1,5 @@
 import EmptyList from "./EmptyList";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 import PypList from "./PypList";
 import { usePypList, useFilteredCourseCode } from "./PypListContext";
 

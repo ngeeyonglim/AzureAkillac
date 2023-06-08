@@ -79,7 +79,7 @@ export default function ImageCrop({ handleImageUpload}) {
           style={{ display: "none" }}
           />
         <button className="profile-img-button" onClick={onChooseImg}>
-          <img src={require("../images/edit-image-logo.png")} alt="edit" 
+          <img src={require("../../images/edit-image-logo.png")} alt="edit" 
           className="profile-img-button-img"/>
         </button>
       </div>)

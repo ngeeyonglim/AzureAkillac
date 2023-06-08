@@ -18,6 +18,7 @@ export default function LoginScreen() {
       // Handle successful login
     } catch (error) {
       // Handle login error
+      console.log(error);
     }
   };
 
@@ -28,6 +29,7 @@ export default function LoginScreen() {
       // Handle successful creation
     } catch (error) {
       // Handle creation error
+      console.log(error);
     }
   };
 
@@ -58,7 +60,7 @@ export default function LoginScreen() {
             placeholder="Password"
             className="login-input"
             />
-          <button type="submit" className="login-button">SIGN UP</button>
+          <button type="submit" className="login-button">Sign Up</button>
         </form>
         <button onClick={() => setSignUp(false)} className="login-anchor">Have an account already? Log In</button>
         </>
@@ -84,7 +86,7 @@ export default function LoginScreen() {
             placeholder="Password"
             className="login-input"
           />
-          <button type="submit" className="login-button">LOGIN</button>
+          <button type="submit" className="login-button">Login</button>
         </form>
         <button onClick={() => setSignUp(true)} className="login-anchor">Don't have an account? Sign Up</button>
         </>

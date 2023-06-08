@@ -15,7 +15,7 @@ export default function ProfilePic() {
         <div>
         {profilePic !== ""
         ? <img src={profilePic} alt="profile" className="profile-image"/> 
-        : <img src={require("../images/profile-pic.jpg")} alt="profile" className="profile-image"/>
+        : <img src={require("../../images/profile-pic.jpg")} alt="profile" className="profile-image"/>
         }
         {editMode 
         ? <ImageCrop handleImageUpload={handleImageUpload} /> 

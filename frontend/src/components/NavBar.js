@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useFilteredCourseCode } from "./PypListContext";
+import { useFilteredCourseCode } from "./Pyp/PypListContext";
 import { auth } from "../firebase"; // Import auth from firebase.js
 import { signOut } from "firebase/auth";
 
