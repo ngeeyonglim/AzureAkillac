@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getAuth, 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword } from "firebase/auth";
+import { createProfile } from "../firebase";
 
 export default function LoginScreen() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -15,7 +16,6 @@ export default function LoginScreen() {
     event.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-      // Handle successful login
     } catch (error) {
       // Handle login error
       console.log(error);
@@ -25,8 +25,10 @@ export default function LoginScreen() {
   const handleCreate = async (event) => {
     event.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, createEmail, createPassword);
-      // Handle successful creation
+      const user = await createUserWithEmailAndPassword(auth, createEmail, createPassword);
+      if (user) {
+        createProfile(user.user.uid, { uid: user.user.uid });
+      }
     } catch (error) {
       // Handle creation error
       console.log(error);
@@ -41,7 +43,7 @@ export default function LoginScreen() {
         {signUp ? (
         <>
         <h3 className="login-subtitle">Sign Up</h3>
-        <form onSubmit={handleCreate}>
+        <form onSubmit={handleCreate} id="signup">
           <label htmlFor="email" className="login-label">Username:</label>
           <input
             type="email"
@@ -50,6 +52,7 @@ export default function LoginScreen() {
             onChange={(event) => setCreateEmail(event.target.value)}
             placeholder="Email"
             className="login-input"
+            autoComplete="username"
             />
           <label htmlFor="password" className="login-label">Password:</label>
           <input
@@ -66,8 +69,8 @@ export default function LoginScreen() {
         </>
         ) : (
           <>
-          <h3 className="login-subtitle">Login</h3>
-          <form onSubmit={handleLogin}>
+          <h3 className="login-subtitle">Log In</h3>
+          <form onSubmit={handleLogin} id="login">
           <label htmlFor="email" className="login-label">Username:</label>
           <input
             type="email"
@@ -76,6 +79,7 @@ export default function LoginScreen() {
             onChange={(event) => setLoginEmail(event.target.value)}
             placeholder="Email"
             className="login-input"
+            autoComplete="username"
           />
           <label htmlFor="password" className="login-label">Password:</label>
           <input

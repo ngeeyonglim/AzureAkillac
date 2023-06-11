@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBNuC2X7VpTf7Zk-FiPioybLabg-2etHyI",
@@ -14,3 +16,17 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const firestore = getFirestore(app);
+
+export async function updateProfile(uid, data) {
+  await setDoc(doc(firestore, "profileData", uid), data, { merge: true });
+}
+
+export async function createProfile(uid, data) {
+  await setDoc(doc(firestore, "profileData", uid), data);
+}
+
+export async function getProfile(uid) {
+  const profile = await getDoc(doc(firestore, "profileData", uid));
+  return profile.data();
+}
