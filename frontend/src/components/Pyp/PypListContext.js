@@ -112,15 +112,15 @@ export function PypListProvider({ children }) {
 
     // fetch list of pyps from backend
     const fetchPyps = async () => {
-        fetch("http://127.0.0.1:5000/getFileNames", {method : 'GET'})
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-        }).then((data) => {
-            setPyps(data);
-        });
-    };
+      fetch("http://127.0.0.1:5000/getCourses", {method : 'GET'})
+      .then(response => {
+          if (response.ok) {
+              return response.json();
+          }
+      }).then((data) => {
+          setPyps(data);
+      });
+  };
 
     // upon rendering homescreen fetch list of pyps from backend
     useEffect(() => {
