@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext } from "react";
+import { useState, useEffect, useContext, createContext, useCallback } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { Route, Routes } from "react-router-dom";
 import LoginScreen from "./components/LoginScreen";
@@ -16,17 +16,29 @@ export function useUser() {
   return useContext(UserContext);
 }
 
+
 export default function App() {
   const pypList = usePypList();
   const [session, setSession] = useState(null);
-
+  const [profile, setProfile] = useState(null);
+  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      const userProfile = user ? getProfile(user.uid) : null;
-      userProfile.then((profile) => {
-        setSession(profile);
+      setSession(user);
+    });
+  }, []);
+
+  const handleUser = useCallback(() => {
+    if (session) {
+      getProfile(session.uid).then((profile) => {
+        setProfile(profile);
       });
-  });}, [session]);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    handleUser();
+  }, [handleUser, session]);
 
   const routes = [
     {
@@ -57,7 +69,7 @@ export default function App() {
 
   return (
     <div>
-      <UserContext.Provider value={session}>
+      <UserContext.Provider value={{profile, handleUser}}>
         {session ? (
         <Routes>
           {allRoutes.map(({ path, element }) => (

@@ -27,6 +27,7 @@ export async function createProfile(uid, data) {
 }
 
 export async function getProfile(uid) {
+  if (!uid) return null;
   const profile = await getDoc(doc(firestore, "profileData", uid));
   return profile.data();
 }
