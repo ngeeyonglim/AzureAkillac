@@ -7,7 +7,7 @@ import UploadScreen from "./components/Pyp/UploadScreen";
 import SearchScreen from "./components/Pyp/SearchScreen";
 import ProfileScreen from "./components/MainPage/ProfileScreen";
 import Pyp from "./components/Pyp/Pyp";
-import { usePypList } from "./components/Pyp/PypListContext";
+import { useCourseList } from "./components/Pyp/PypListContext";
 import { auth, getProfile } from "./firebase"; // Import auth from firebase.js
 
 const UserContext = createContext();
@@ -18,7 +18,7 @@ export function useUser() {
 
 
 export default function App() {
-  const pypList = usePypList();
+  const courses = useCourseList();
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
   
@@ -38,7 +38,7 @@ export default function App() {
 
   useEffect(() => {
     handleUser();
-  }, [handleUser, session]);
+  }, [handleUser]);
 
   const routes = [
     {
@@ -61,9 +61,9 @@ export default function App() {
 
   const allRoutes = [
     ...routes,
-    ...pypList.map((pyp) => ({
-      path: `/search/${pyp.courseCode + pyp.pypYear + pyp.semester + pyp.midOrFinals}`,
-      element: <Pyp pyp={pyp} />,
+    ...courses.map(course => ( {
+      path: `/search/${course.courseCode}`,
+      element: <Pyp courseCode={course.courseCode} />,
     }))
   ];
 

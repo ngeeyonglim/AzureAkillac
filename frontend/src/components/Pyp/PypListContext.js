@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext, createContext } from "react";
 
-const PypListContext = createContext();
+const CourseListContext = createContext();
 const PypListUpdateContext = createContext();
 const FilteredCourseCodeContext = createContext();
 
-export function usePypList() {
-    return useContext(PypListContext);
+export function useCourseList() {
+    return useContext(CourseListContext);
 }
 
 export function useUpdatePypList() {
@@ -17,8 +17,8 @@ export function useFilteredCourseCode() {
 }
 
 export function PypListProvider({ children }) {
-    // pyp is the state variable that holds the array of pyps
-    const [pyps, setPyps] = useState([]);
+    // courses is the state variable that holds the array of courses
+    const [courses, setCourses] = useState([]);
 
     // uploadPyp is the state variable that holds the pyp to be uploaded
     const [uploadPyp, setUploadPyp] = useState({
@@ -97,7 +97,7 @@ export function PypListProvider({ children }) {
                 }
             };
             uploadFile();
-            fetchPyps();
+            fetchCourses();
             setUploadPyp({
                 courseCode: "",
                 pypYear1: "",
@@ -110,25 +110,25 @@ export function PypListProvider({ children }) {
         }
     };
 
-    // fetch list of pyps from backend
-    const fetchPyps = async () => {
+    // fetch list of courses from backend
+    const fetchCourses = async () => {
       fetch("http://127.0.0.1:5000/getCourses", {method : 'GET'})
       .then(response => {
-          if (response.ok) {
-              return response.json();
-          }
+        if (response.ok) {
+            return response.json();
+        }
       }).then((data) => {
-          setPyps(data);
+        setCourses(data);
       });
   };
 
-    // upon rendering homescreen fetch list of pyps from backend
+    // upon rendering homescreen fetch list of courses from backend
     useEffect(() => {
-        fetchPyps();
+        fetchCourses();
     }, []);
 
     return (
-        <PypListContext.Provider value={pyps}>
+        <CourseListContext.Provider value={courses}>
             <PypListUpdateContext.Provider 
                 value={{handleSetPyps, handleUploadPyp, uploadPyp}}>
                     <FilteredCourseCodeContext.Provider 
@@ -138,6 +138,6 @@ export function PypListProvider({ children }) {
                         {children}
                     </FilteredCourseCodeContext.Provider>
             </PypListUpdateContext.Provider>
-        </PypListContext.Provider>
+        </CourseListContext.Provider>
     );
 }

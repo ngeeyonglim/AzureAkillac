@@ -3,18 +3,18 @@ import Card from "./Card";
 export default function PypList({pyp}) {
     return (
         <div className="list">
-        <h1>Past Year Papers</h1>
+        <h1 className="list-header">Courses</h1>
         <table>
             <thead>
                 <tr>
-                    <th>{pyp.length} Papers Found</th>
+                    <th>{pyp.length} Courses Found</th>
                 </tr>
             </thead>
             <tbody>
-                {pyp.map((pyp, i) =>  {
+                {pyp.map((courseCode, i) =>  {
                     return (
                     <tr key={i}>
-                        <Card pyp={pyp} />
+                        <Card courseCode={courseCode} />
                     </tr> 
                 );
             })}

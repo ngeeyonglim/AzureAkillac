@@ -1,20 +1,30 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export default function Card({ pyp }) {
-    const {courseCode} = pyp
-        // pypYear, 
-        // semester, 
-        // midOrFinals, 
-        // ansOrQuestions} = pyp;
+export default function Card({ courseCode }) {
+    const [fileNames, setFileNames] = useState([]);
+
+    const getFileNames = (courseCode) => {
+        fetch(`http://127.0.0.1:5000/getFileNames?courseCode=${courseCode.courseCode}`, { method: 'GET' })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+        }).then((data) => {
+            setFileNames(data);
+        });
+    };
+
+    useEffect(() => {
+        getFileNames(courseCode);
+    }, [courseCode]);
 
     return (
         <td className="card">
-            <p>{ courseCode }</p>
-            {/* <p>{ pypYear.slice(0,2)}/{pypYear.slice(2,4)}</p>
-            <p>{ semester }</p>
-            {midOrFinals === "Mid" ? <p>Midterms</p> : <p>Finals</p>}
-            <p>{ ansOrQuestions }</p>
-            <Link to={`/search/${courseCode + pypYear + semester + midOrFinals}`}>View</Link> */}
+            <Link to={`/search/${courseCode.courseCode}`} className="card-link">
+            <p>{ courseCode.courseCode }</p>
+            <p>({ fileNames.length } Papers Found)</p>
+            </Link>
         </td>
     )
 }
