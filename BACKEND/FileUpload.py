@@ -46,7 +46,7 @@ def upload_file_from_Flask():
   file = request.files['file']
 
   if file:
-    destination_path = f'{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
+    destination_path = f'Modules/{courseCode}/{pypYear}{semester}{midOrFinals}/{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
     bucket = storage.bucket()
     blob = bucket.blob(destination_path)
     blob.upload_from_file(file, content_type = 'application/pdf')
@@ -57,10 +57,10 @@ def upload_file_from_Flask():
 ## TO EDIT CUrrently using flask
 
 @app.route('/download', methods=['GET'])
-def download_file(module_code, year, sem, ans_qns):
+def download_file(courseCode, pypYear, semester, midOrFinals, ansOrQuestions):
   # Input for ans_qns = Answers or Questions
 
-  destination_path = f'{module_code}_{year}Sem{sem}{ans_qns}'
+  destination_path = f'Modules/{courseCode}/{pypYear}{semester}{midOrFinals}/{courseCode}_{pypYear}{semester}{midOrFinals}{ansOrQuestions}'
   # Get a reference to the default Firebase Storage bucket
   bucket = storage.bucket()
 
@@ -97,6 +97,34 @@ def download_file(module_code, year, sem, ans_qns):
 # b = [{path: "tut3.pdf", preview: "blob:http://localhost:3000/9f05a114-70bc-498b-bbc4-576feb72984e"}]
 # upload_file(b, 'btest', 2022, 2, 'Answer')
 
+@app.route('/getCourses', methods=['GET'])
+def get_Courses():
+    # Get a reference to the default Firebase Cloud Storage bucket
+    bucket = storage.bucket()
+    
+    print(bucket.name)  # Print the bucket name for debugging
+
+    courses = []
+    # blobs = bucket.list_blobs(prefix='Modules/')
+    blobs = bucket.list_blobs(prefix='Modules/')
+    dict = {}
+    # Extract subfolder names from the blobs
+    for blob in blobs:
+        course = {}
+        name = blob.name.split('/')
+        if name[0] == 'Modules' and name[1] != "" and name[1] not in dict:
+          print(name[1])
+          dict[name[1]] = 1
+          course['courseCode'] = name[1]
+          courses.append(course)
+    
+    print(dict)
+    print(courses)
+
+    response = make_response(json.dumps(courses))
+    return response
+
+
 
 
 @app.route('/getFileNames', methods=['GET'])
@@ -106,32 +134,33 @@ def get_file_names_and_paths():
     
     files = []
 
-    # List all files and folders in the bucket
-    blobs = bucket.list_blobs()
+    course = request.args.get('courseCode')
+
+    # List all files and folders in the bucket with a prefix of 'Modules/course/'
+    blobs = bucket.list_blobs(prefix=f'Modules/{course}/')
 
     # Extract file names and paths from the blobs
-    # Iterate over the blobs and print the file names
     for blob in blobs:
-      url = blob.generate_signed_url(
-        version="v4",
-        expiration=datetime.timedelta(minutes=15),
-        method="GET"
-      )
-      if not blob.name.endswith('/'):
-        file_name = blob.name
-        parts =  file_name.split('_')
-        next_file = {}
-        next_file['courseCode'] = parts[0]
-        next_file['pypYear'] = parts[1][0:4]
-        next_file['semester'] = parts[1][4:8]
-        next_file['midOrFinals'] = parts[1][8:11]
-        if next_file['midOrFinals'] == 'Fin':
-           next_file['midOrFinals'] = 'Finals'
-        else:
-           next_file['midOrFinals'] = 'Midterms'
-        next_file['ansOrQuestions'] = parts[1][11:].split('.')[0]
-        next_file['file'] = url
-        files.append(next_file)
+        url = blob.generate_signed_url(
+            version="v4",
+            expiration=datetime.timedelta(minutes=15),
+            method="GET"
+        )
+        if not blob.name.endswith('/'):
+            file_name = blob.name.replace(f'Modules/{course}/', '')
+            parts = file_name.split('_')
+            next_file = {}
+            next_file['courseCode'] = parts[0]
+            next_file['pypYear'] = parts[1][0:4]
+            next_file['semester'] = parts[1][4:8]
+            next_file['midOrFinals'] = parts[1][8:11]
+            if next_file['midOrFinals'] == 'Fin':
+                next_file['midOrFinals'] = 'Finals'
+            else:
+                next_file['midOrFinals'] = 'Midterms'
+            next_file['ansOrQuestions'] = parts[1][11:].split('.')[0]
+            next_file['file'] = url
+            files.append(next_file)
     
     response = make_response(json.dumps(files))
 
@@ -142,3 +171,5 @@ if __name__ == '__main__':
     app.run()
 
 
+
+# %%
