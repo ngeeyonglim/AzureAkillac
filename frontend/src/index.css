@@ -269,6 +269,7 @@ table {
   text-align: left;
   border-spacing: 15px;
 }
+
 .card {
   background-color: #29BDC5;
   margin: 0.05em auto;
@@ -294,6 +295,14 @@ table {
   font-size: 64px;
 }
 
+.profilescreen {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 2fr 5fr;
+  grid-template-rows: 0.75fr 2fr 5fr;
+  text-align: center;
+}
+
 .profile-image {
   margin: 50px;
   height: 300px;
@@ -308,7 +317,7 @@ table {
   background-color: transparent;
   border: none;
   position: absolute;
-  margin-left: 310px;
+  margin-left: 120px;
   top: 50%;
 }
 
@@ -336,4 +345,20 @@ table {
   position: absolute;
   right: 25%;
   top: 50%;
+}
+
+.profilecard {
+  background-color: #29BDC5;
+  margin: 0.05em 100px;
+  padding: 15px;
+  border-radius: 2em;
+  text-align: center;
+  width: 60%;
+}
+
+.p {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
 }
