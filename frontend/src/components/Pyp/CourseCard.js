@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export default function Card({ courseCode }) {
+export default function CourseCard({ courseCode }) {
     const [fileNames, setFileNames] = useState([]);
 
     const getFileNames = (courseCode) => {

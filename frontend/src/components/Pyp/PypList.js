@@ -1,4 +1,4 @@
-import Card from "./Card";
+import CourseCard from "./CourseCard";
 
 export default function PypList({pyp}) {
     return (
@@ -14,7 +14,7 @@ export default function PypList({pyp}) {
                 {pyp.map((courseCode, i) =>  {
                     return (
                     <tr key={i}>
-                        <Card courseCode={courseCode} />
+                        <CourseCard courseCode={courseCode} />
                     </tr> 
                 );
             })}
