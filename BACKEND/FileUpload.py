@@ -38,7 +38,7 @@ bucket = storage.bucket(app=fb_app)
 # courseCode, pypYear, semester, midOrFinals, ansOrQuestions, file
 @app.route('/upload', methods=['POST'])
 def upload_file_from_Flask():
-  courseCode = request.form['courseCode']
+  courseCode = request.form['courseCode'].upper()
   pypYear = request.form['pypYear']
   semester = request.form['semester']
   midOrFinals = request.form['midOrFinals']
@@ -169,7 +169,3 @@ def get_file_names_and_paths():
 
 if __name__ == '__main__':
     app.run()
-
-
-
-# %%
