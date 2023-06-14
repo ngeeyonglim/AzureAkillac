@@ -11,6 +11,7 @@ export default function Pyp({ courseCode }) {
                 return response.json();
             }
         }).then((data) => {
+            console.log(data);
             setFileNames(data);
         });
     };

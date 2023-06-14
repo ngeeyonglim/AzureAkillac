@@ -118,6 +118,7 @@ export function PypListProvider({ children }) {
             return response.json();
         }
       }).then((data) => {
+        console.log(data);
         setCourses(data);
       });
   };
