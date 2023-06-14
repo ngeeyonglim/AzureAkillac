@@ -126,9 +126,8 @@ def get_Courses():
 
 
 
-
-@app.route('/getFileNames', methods=['GET'])
-def get_file_names_and_paths():
+@app.route('/getYears', methods=['GET'])
+def get_years():
     # Get a reference to the default Firebase Cloud Storage bucket
     bucket = storage.bucket()
     
@@ -146,20 +145,18 @@ def get_file_names_and_paths():
             expiration=datetime.timedelta(minutes=15),
             method="GET"
         )
-        if not blob.name.endswith('/'):
-            file_name = blob.name.replace(f'Modules/{course}/', '')
-            parts = file_name.split('_')
+        name = blob.name.split('/')
+        if not blob.name.endswith('/') and name[1] == course:
+            file_name = name[2]
             next_file = {}
-            next_file['courseCode'] = parts[0]
-            next_file['pypYear'] = parts[1][0:4]
-            next_file['semester'] = parts[1][4:8]
-            next_file['midOrFinals'] = parts[1][8:11]
+            next_file['courseCode'] = course
+            next_file['pypYear'] = file_name[0:4]
+            next_file['semester'] = file_name[4:8]
+            next_file['midOrFinals'] = file_name[8:11]
             if next_file['midOrFinals'] == 'Fin':
                 next_file['midOrFinals'] = 'Finals'
             else:
                 next_file['midOrFinals'] = 'Midterms'
-            next_file['ansOrQuestions'] = parts[1][11:].split('.')[0]
-            next_file['file'] = url
             files.append(next_file)
     
     response = make_response(json.dumps(files))
@@ -167,5 +164,50 @@ def get_file_names_and_paths():
     return response
 
 
+
+
+@app.route('/getFileNames', methods=['GET'])
+def get_file_names_and_paths():
+    # Get a reference to the default Firebase Cloud Storage bucket
+    bucket = storage.bucket()
+
+    course = request.args.get('courseCode')
+    pyp_year = request.args.get('pypYear')
+    semester = request.args.get('semester')
+    mid_or_finals = request.args.get('midOrFinals')
+
+    # Construct the file name prefix based on the provided attributes
+    prefix = f'Modules/{course}/{pyp_year}{semester}{mid_or_finals}'
+
+    files = []
+
+    # List all files in the bucket with the specified prefix
+    blobs = bucket.list_blobs(prefix=prefix)
+
+    # Extract file names and paths from the blobs
+    for blob in blobs:
+        url = blob.generate_signed_url(
+            version="v4",
+            expiration=datetime.timedelta(minutes=15),
+            method="GET"
+        )
+        name = blob.name.split('/')
+        if not blob.name.endswith('/'):
+            file_name = blob.name.replace(prefix + '_', '')
+            next_file = {}
+            next_file['courseCode'] = course
+            next_file['pypYear'] = pyp_year
+            next_file['semester'] = semester
+            next_file['midOrFinals'] = 'Finals' if mid_or_finals == 'Fin' else 'Midterms'
+            next_file['ansOrQuestions'] = name[-1].split('_')[-1][11:].split('.')[0]
+            next_file['file'] = url
+            files.append(next_file)
+
+    response = make_response(json.dumps(files))
+
+    return response
+
+
 if __name__ == '__main__':
     app.run()
+
