@@ -9,8 +9,8 @@ export default function ProfilePic() {
     const { profile, handleUser } = useUser();
     const editMode = useEdit();
     const [profilePic, setProfilePic] = useState(require("../../images/profile-pic.jpg"));
-    const handleImageUpload = (image) => {
-        updateProfile(profile.uid, { photoUrl: image });
+    const handleImageUpload = async (image) => {
+        await updateProfile(profile.uid, { photoUrl: image });
         handleUser();
     };
 

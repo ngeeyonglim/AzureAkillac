@@ -86,12 +86,13 @@ button {
 }
 
 .logout-button {
-  margin: 25px 20px;
+  margin: auto 20px;
   height: 25px;
   width: 70px;
   border: none;
   border-radius: 12.5px;
   background-color: #29BDC5;
+  align-self: center;
 }
 
 .upload-logo {
@@ -158,11 +159,6 @@ button {
   font-size: 48px;
 }
 
-.profiletab {
-  background-color: #d9d9d9;
-  border-radius: 50px;
-  margin: 10px;
-}
 
 .newsfeed {
   background-color: #d9d9d9;
@@ -295,12 +291,50 @@ table {
   font-size: 64px;
 }
 
+.profiletab {
+  background-color: #d9d9d9;
+  border-radius: 50px;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.profiletab-image {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin: 30px;
+}
+
+.profiletab-button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 25px;
+  background-color: #29BDC5;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
 .profilescreen {
   display: grid;
   height: 100vh;
   grid-template-columns: 2fr 5fr;
   grid-template-rows: 0.75fr 2fr 5fr;
   text-align: center;
+}
+
+.edit-button {
+  height: 50px;
+  width: 200px;
+  border: none;
+  border-radius: 25px;
+  background-color: #29BDC5;
+  align-self: center;
+  margin: 25%;
 }
 
 .profile-image {
@@ -347,18 +381,35 @@ table {
   top: 50%;
 }
 
+.profileinfo {
+  margin: 50px;
+  text-align: left;
+}
+
+.profileData {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .profilecard {
   background-color: #29BDC5;
-  margin: 0.05em 100px;
+  margin: 10px 7%;
   padding: 15px;
   border-radius: 2em;
   text-align: center;
-  width: 60%;
+  width: 600px;
+  border: none;
 }
 
-.p {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin: 0 auto;
+.confirm-button {
+  position: absolute;
+  margin: auto 20px;
+  right: 3%;
+  height: 25px;
+  width: 70px;
+  border: none;
+  border-radius: 12.5px;
+  background-color: #29BDC5;
+  align-self: center;
 }

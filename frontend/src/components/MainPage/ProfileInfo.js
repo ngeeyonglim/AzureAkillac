@@ -2,7 +2,6 @@ import { useEdit } from "./ProfileScreen";
 import { useState, useEffect } from "react";
 import { useUser } from "../../App";
 import { updateProfile } from "../../firebase";
-import ProfileCard from "./ProfileCard";
 
 export default function ProfileInfo() {
     const editMode = useEdit();
@@ -10,19 +9,24 @@ export default function ProfileInfo() {
     const [name, setName] = useState("");
     const [major, setMajor] = useState("");
 
-    const handleNameChange = () => {
-        updateProfile(profile.uid, { name: name});
+    const handleNameChange = async () => {
+        await updateProfile(profile.uid, { name: name });
         handleUser();
     };
 
-    const handleMajorChange = () => {
-        updateProfile(profile.uid, { major: major });
+    const handleMajorChange = async () => {
+        await updateProfile(profile.uid, { major: major });
         handleUser();
     };
 
     useEffect(() => {
-        if (profile) {
+        if (profile?.name) {
             setName(profile.name);
+        }
+    }, [profile]);
+
+    useEffect(() => {
+        if (profile?.major) {
             setMajor(profile.major);
         }
     }, [profile]);
@@ -30,31 +34,47 @@ export default function ProfileInfo() {
     return (
         <div className="profileinfo">
             {editMode ? 
-            <h1>
-                Name: 
+            <div className="profileData">
+                <h1>Name: </h1>
                 <input type="text" 
                     className="profilecard" 
                     value={name}
+                    style={{fontWeight: "bold",
+                            fontSize: "1.5rem",
+                            width: "600px"}}
                     onChange={event => setName(event.target.value)}>
                 </input> 
-                <button onClick={handleNameChange}>
+                <button onClick={handleNameChange} className="confirm-button">
                     Confirm
                 </button>
-            </h1>
-            : <h1 className="p">Name: <ProfileCard input={name} /></h1>}
+            </div>
+            : (
+            <div className="profileData">
+                <h1>Name: </h1>
+                <h2 className="profilecard">{name}</h2>
+            </div>
+            )}
             {editMode ? 
-            <h1>
-                Major: 
+            <div className="profileData">
+                <h1>Major: </h1>
                 <input type="text" 
                     className="profilecard" 
                     value={major}
+                    style={{fontWeight: "bold",
+                            fontSize: "1.5rem",
+                            width: "600px"}}
                     onChange={event => setMajor(event.target.value)}>
                 </input> 
-                <button onClick={handleMajorChange}>
+                <button onClick={handleMajorChange} className="confirm-button">
                     Confirm
                 </button>
-            </h1>
-            : <h1 className="p">Major: <ProfileCard input={major} /></h1>}
+            </div>
+            : (
+            <div className="profileData">
+                <h1>Major: </h1>
+                <h2 className="profilecard">{major}</h2>
+            </div>
+            )}
         </div>
     );
 }
