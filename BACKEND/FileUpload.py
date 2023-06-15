@@ -138,15 +138,12 @@ def get_years():
     # List all files and folders in the bucket with a prefix of 'Modules/course/'
     blobs = bucket.list_blobs(prefix=f'Modules/{course}/')
 
+    prefix = set()
     # Extract file names and paths from the blobs
     for blob in blobs:
-        url = blob.generate_signed_url(
-            version="v4",
-            expiration=datetime.timedelta(minutes=15),
-            method="GET"
-        )
         name = blob.name.split('/')
-        if not blob.name.endswith('/') and name[1] == course:
+        if not blob.name.endswith('/') and name[1] == course and name[2] not in prefix:
+            prefix.add(name[2])
             file_name = name[2]
             next_file = {}
             next_file['courseCode'] = course
