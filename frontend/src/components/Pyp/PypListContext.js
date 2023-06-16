@@ -112,16 +112,45 @@ export function PypListProvider({ children }) {
 
     // fetch list of courses from backend
     const fetchCourses = async () => {
-      fetch("http://127.0.0.1:5000/getCourses", {method : 'GET'})
-      .then(response => {
-        if (response.ok) {
-            return response.json();
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/getCourses`, { method: 'GET' });
+            if (response.ok) {
+                const data = await response.json();
+                setCourses(data);
+            }
+        } catch (error) {
+            console.error('Error fetching courses:', error);
         }
-      }).then((data) => {
-        console.log(data);
-        setCourses(data);
-      });
-  };
+    };
+
+
+    // fetch list of pyps of specific course from backend
+    const fetchPypNames = async (courseCode, setPyps) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/getYears?courseCode=${courseCode}`, { method: 'GET' });
+            if (response.ok) {
+                const data = await response.json();
+                setPyps(data);
+            }
+        } catch (error) {
+            console.error('Error fetching Pyp names:', error);
+        }
+    };
+
+
+    // fetch files of respective pyp from backend
+    const fetchPypFiles = async (courseCode, pypYear, semester, midOrFinals, setFiles) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/getFileNames?courseCode=${courseCode}&pypYear=${pypYear}&semester=${semester}&midOrFinals=${midOrFinals}`, { method: 'GET' });
+            if (response.ok) {
+                const data = await response.json();
+                setFiles(data);
+            }
+        } catch (error) {
+            console.error('Error fetching Pyp files:', error);
+        }
+    };
+
 
     // upon rendering homescreen fetch list of courses from backend
     useEffect(() => {
@@ -129,7 +158,7 @@ export function PypListProvider({ children }) {
     }, []);
 
     return (
-        <CourseListContext.Provider value={courses}>
+        <CourseListContext.Provider value={{ courses, fetchPypFiles, fetchPypNames }}>
             <PypListUpdateContext.Provider 
                 value={{handleSetPyps, handleUploadPyp, uploadPyp}}>
                     <FilteredCourseCodeContext.Provider 

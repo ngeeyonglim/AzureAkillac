@@ -1,19 +1,19 @@
 import EmptyList from "./EmptyList";
 import NavBar from "../NavBar";
-import PypList from "./PypList";
+import CourseList from "./CourseList";
 import { useCourseList, useFilteredCourseCode } from "./PypListContext";
 
 export default function SearchScreen() {
-    const courses = useCourseList();
+    const { courses } = useCourseList();
     const { courseCode } = useFilteredCourseCode();
-    const filteredPyp = courses.filter(course => 
+    const filteredCourses = courses.filter(course => 
         course.courseCode.toLowerCase().includes(courseCode.toLowerCase()));
         
     return (
         <div>
             <NavBar />
-            {filteredPyp.length > 0 
-            ? <PypList pyp={filteredPyp} /> 
+            {filteredCourses.length > 0 
+            ? <CourseList courses={filteredCourses} /> 
             : <EmptyList />}
         </div>
     );

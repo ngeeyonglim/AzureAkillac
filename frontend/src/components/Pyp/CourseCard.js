@@ -1,29 +1,20 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useCourseList } from "./PypListContext";
 
 export default function CourseCard({ courseCode }) {
-    const [fileNames, setFileNames] = useState([]);
-
-    const getFileNames = (courseCode) => {
-        fetch(`http://127.0.0.1:5000/getFileNames?courseCode=${courseCode.courseCode}`, { method: 'GET' })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-        }).then((data) => {
-            setFileNames(data);
-        });
-    };
+    const { fetchPypNames } = useCourseList();
+    const [pypNames, setPypNames] = useState([]);
 
     useEffect(() => {
-        getFileNames(courseCode);
-    }, [courseCode]);
+        fetchPypNames(courseCode.courseCode, setPypNames);
+    }, [courseCode.courseCode, fetchPypNames]);
 
     return (
         <td className="card">
             <Link to={`/search/${courseCode.courseCode}`} className="card-link">
             <p>{ courseCode.courseCode }</p>
-            <p>({ fileNames.length } Papers Found)</p>
+            <p>({ pypNames.length } Papers Found)</p>
             </Link>
         </td>
     )
