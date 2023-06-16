@@ -12,16 +12,25 @@ export default function Pyp({ pypName }) {
         fetchPypFiles(courseCode, pypYear, semester, midOrFinals, setFiles);
     }, [courseCode, pypYear, semester, midOrFinals, fetchPypFiles]);
 
-    console.log(files);
+    const qns = files.filter(file => file.ansOrQuestions == "Questions");
+    const ans = files.filter(file => file.ansOrQuestions == "Answers");
 
     return (
         <div>
             <NavBar />
-            <h1>{ courseCode }</h1>
-            <h1>{ pypYear }</h1>
-            <h1>{ semester }</h1>
-            <h1>{ midOrFinals }</h1>
-            <a href={files[0].file} target="blank">view</a>
+            <h1 className="pyp-title">
+                { courseCode } 20{ pypYear.substring(0, 2) }/20{pypYear.substring(2, 4)} { semester.substring(0, 3) } { semester.substring(3, 4)} { midOrFinals }
+            </h1>
+            <ul className="pyp-list">
+                <li>{qns.length > 0
+                    ? <a href={qns[0].file} target="_blank" className="pyp-link">Click here to View Questions</a> 
+                    : <p>Questions not available</p>}
+                </li>
+                <li>{ans.length > 0
+                    ? <a href={ans[0].file} target="_blank" className="pyp-link">Click here to View Answers</a> 
+                    : <p>Answers not available</p>}
+                </li>
+            </ul>
         </div>
     );
 }
