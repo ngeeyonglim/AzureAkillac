@@ -141,9 +141,10 @@ export function PypListProvider({ children }) {
     // fetch files of respective pyp from backend
     const fetchPypFiles = async (courseCode, pypYear, semester, midOrFinals, setFiles) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/getFileNames?courseCode=${courseCode}&pypYear=${pypYear}&semester=${semester}&midOrFinals=${midOrFinals}`, { method: 'GET' });
+            const response = await fetch(`http://127.0.0.1:5000/getFileNames?courseCode=${courseCode}&pypYear=${pypYear}&semester=${semester}&midOrFinals=${midOrFinals.substring(0,2)}`, { method: 'GET' });
             if (response.ok) {
                 const data = await response.json();
+                console.log(data);
                 setFiles(data);
             }
         } catch (error) {

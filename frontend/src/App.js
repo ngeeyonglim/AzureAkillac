@@ -82,7 +82,7 @@ export default function App() {
     getRoutes();
     setRoutes(route);
     // eslint-disable-next-line
-  }, []);
+  }, [courses, fetchPypNames]);
 
   return (
     <div>
