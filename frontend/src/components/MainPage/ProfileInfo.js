@@ -5,18 +5,18 @@ import { updateProfile } from "../../firebase";
 
 export default function ProfileInfo() {
     const editMode = useEdit();
-    const { profile, handleUser } = useUser();
+    const { profile } = useUser();
     const [name, setName] = useState("");
     const [major, setMajor] = useState("");
 
-    const handleNameChange = async () => {
-        await updateProfile(profile.uid, { name: name });
-        handleUser();
+    const handleNameChange = async (event) => {
+        setName(event.target.value);
+        await updateProfile(profile.uid, { name: event.target.value });
     };
 
-    const handleMajorChange = async () => {
-        await updateProfile(profile.uid, { major: major });
-        handleUser();
+    const handleMajorChange = async (event) => {
+        setMajor(event.target.value);
+        await updateProfile(profile.uid, { major: event.target.value });
     };
 
     useEffect(() => {
@@ -42,11 +42,8 @@ export default function ProfileInfo() {
                     style={{fontWeight: "bold",
                             fontSize: "1.5rem",
                             width: "600px"}}
-                    onChange={event => setName(event.target.value)}>
+                    onChange={handleNameChange}>
                 </input> 
-                <button onClick={handleNameChange} className="confirm-button">
-                    Confirm
-                </button>
             </div>
             : (
             <div className="profileData">
@@ -63,11 +60,8 @@ export default function ProfileInfo() {
                     style={{fontWeight: "bold",
                             fontSize: "1.5rem",
                             width: "600px"}}
-                    onChange={event => setMajor(event.target.value)}>
+                    onChange={handleMajorChange}>
                 </input> 
-                <button onClick={handleMajorChange} className="confirm-button">
-                    Confirm
-                </button>
             </div>
             : (
             <div className="profileData">
