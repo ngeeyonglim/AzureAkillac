@@ -79,7 +79,7 @@ export function PypListProvider({ children }) {
                 formData.append('file', uploadPyp.file[0]);
 
                 try {
-                    const response = await fetch('http://127.0.0.1:5000/upload', {
+                    const response = await fetch('/upload', {
                         method: 'POST',
                         body: formData,
                     });
@@ -113,7 +113,7 @@ export function PypListProvider({ children }) {
     // fetch list of courses from backend
     const fetchCourses = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/getCourses`, { method: 'GET' });
+            const response = await fetch(`/getCourses`, { method: 'GET' });
             if (response.ok) {
                 const data = await response.json();
                 setCourses(data);
@@ -127,7 +127,7 @@ export function PypListProvider({ children }) {
     // fetch list of pyps of specific course from backend
     const fetchPypNames = async (courseCode, setPyps) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/getYears?courseCode=${courseCode}`, { method: 'GET' });
+            const response = await fetch(`/getYears?courseCode=${courseCode}`, { method: 'GET' });
             if (response.ok) {
                 const data = await response.json();
                 setPyps(data);
@@ -141,7 +141,7 @@ export function PypListProvider({ children }) {
     // fetch files of respective pyp from backend
     const fetchPypFiles = async (courseCode, pypYear, semester, midOrFinals, setFiles) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/getFileNames?courseCode=${courseCode}&pypYear=${pypYear}&semester=${semester}&midOrFinals=${midOrFinals.substring(0,2)}`, { method: 'GET' });
+            const response = await fetch(`/getFileNames?courseCode=${courseCode}&pypYear=${pypYear}&semester=${semester}&midOrFinals=${midOrFinals.substring(0,2)}`, { method: 'GET' });
             if (response.ok) {
                 const data = await response.json();
                 setFiles(data);
