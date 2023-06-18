@@ -1,4 +1,5 @@
 import { useState, useContext, createContext } from "react";
+import { useUser } from "../../App";
 import NavBar from "../NavBar";
 import ProfilePic from "./ProfilePic";
 import ProfileInfo from "./ProfileInfo";
@@ -10,8 +11,12 @@ export function useEdit() {
 }
 
 export default function ProfileScreen() {
+    const { handleUser } = useUser();
     const [editMode, setEditMode] = useState(false);
     const handleEdit = () => {
+        if (editMode) {
+            handleUser();
+        }
         setEditMode(!editMode);
     };
     return (
@@ -20,7 +25,7 @@ export default function ProfileScreen() {
                 <NavBar />
                 <ProfilePic />
                 <ProfileInfo />
-                <button onClick={handleEdit} className="edit-button">Edit Profile</button>
+                <button onClick={handleEdit} className="edit-button">{editMode? "Done" : "Edit Profile"}</button>
             </div>
         </EditContext.Provider>
     );
