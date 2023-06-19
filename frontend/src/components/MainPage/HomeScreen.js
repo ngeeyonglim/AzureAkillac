@@ -5,6 +5,7 @@ import ProfileTab from "./ProfileTab";
 import WelcomeBackBanner from "./WelcomeBackBanner";
 
 export default function HomeScreen() {
+
     return (
         <div className="homepage">
             <NavBar />

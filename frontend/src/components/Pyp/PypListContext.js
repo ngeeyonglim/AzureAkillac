@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 
 const CourseListContext = createContext();
 const PypListUpdateContext = createContext();
@@ -151,14 +151,12 @@ export function PypListProvider({ children }) {
         }
     };
 
-
-    // upon rendering homescreen fetch list of courses from backend
     useEffect(() => {
         fetchCourses();
     }, []);
 
     return (
-        <CourseListContext.Provider value={{ courses, fetchPypFiles, fetchPypNames }}>
+        <CourseListContext.Provider value={{ courses, fetchPypFiles, fetchPypNames, fetchCourses }}>
             <PypListUpdateContext.Provider 
                 value={{handleSetPyps, handleUploadPyp, uploadPyp}}>
                     <FilteredCourseCodeContext.Provider 

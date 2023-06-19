@@ -1,6 +1,7 @@
 import CourseCard from "./CourseCard";
 
 export default function CourseList({ courses }) {
+    
     return (
         <div className="list">
         <h1 className="list-header">Courses</h1>

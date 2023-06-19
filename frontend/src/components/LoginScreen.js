@@ -54,6 +54,7 @@ export default function LoginScreen() {
             className="login-input"
             autoComplete="username"
             />
+          <br />
           <label htmlFor="password" className="login-label">Password:</label>
           <input
             type="password"
@@ -63,6 +64,7 @@ export default function LoginScreen() {
             placeholder="Password"
             className="login-input"
             />
+          <br />
           <button type="submit" className="login-button">Sign Up</button>
         </form>
         <button onClick={() => setSignUp(false)} className="login-anchor">Have an account already? Log In</button>
@@ -81,6 +83,7 @@ export default function LoginScreen() {
             className="login-input"
             autoComplete="username"
           />
+          <br />
           <label htmlFor="password" className="login-label">Password:</label>
           <input
             type="password"
@@ -90,6 +93,7 @@ export default function LoginScreen() {
             placeholder="Password"
             className="login-input"
           />
+          <br />
           <button type="submit" className="login-button">Login</button>
         </form>
         <button onClick={() => setSignUp(true)} className="login-anchor">Don't have an account? Sign Up</button>

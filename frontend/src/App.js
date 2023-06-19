@@ -10,6 +10,7 @@ import SearchScreen from "./components/Pyp/SearchScreen";
 import ProfileScreen from "./components/MainPage/ProfileScreen";
 import PypList from "./components/Pyp/PypList";
 import Pyp from "./components/Pyp/Pyp";
+import LoadingScreen from "./components/LoadingScreen";
 
 const UserContext = createContext();
 
@@ -40,6 +41,7 @@ export default function App() {
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
   const [routes, setRoutes] = useState(route);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -51,6 +53,7 @@ export default function App() {
     if (session) {
       getProfile(session.uid).then((profile) => {
         setProfile(profile);
+        setLoading(false);
       });
     }
   }, [session]);
@@ -86,16 +89,20 @@ export default function App() {
 
   return (
     <div>
-      <UserContext.Provider value={{profile, handleUser}}>
-        {session ? (
-        <Routes>
-          {routes.map(({ path, element }) => (
-            <Route key={path} path={path} element={element} />
-          ))}
-        </Routes>) : (
-          <LoginScreen />
-        )}
-      </UserContext.Provider>
+      {session ? (
+        loading ? (
+          <LoadingScreen />
+        ) : (
+        <UserContext.Provider value={{profile, handleUser}}>
+          <Routes>
+            {routes.map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
+            ))}
+          </Routes>
+        </UserContext.Provider>
+      )) : (
+        <LoginScreen />
+      )}
     </div>
   );
 }
