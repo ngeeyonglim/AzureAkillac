@@ -4,7 +4,7 @@ export default function LoadingScreen() {
             <div className="login-style">
             <h1 className="login-title">AKILLAC</h1>
             <h2 className="login-slogan">Soar and Score</h2>
-            <h1 className="logging-in">Logging In...</h1>
+            <h1 className="logging-in">Loading...</h1>
             </div>
         </div>
     );

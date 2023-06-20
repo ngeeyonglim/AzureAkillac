@@ -2,6 +2,7 @@ import { useCourseList } from "./PypListContext";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar";
 import PypCard from "./PypCard";
+import LoadingScreen from "../LoadingScreen";
 
 export default function PypList({ courseCode }) {
     const { fetchPypNames } = useCourseList();
@@ -14,6 +15,10 @@ export default function PypList({ courseCode }) {
 
     return (
         <div>
+        {pyps.length === 0 ?
+        <LoadingScreen />
+        :
+        <>
         <NavBar />
         <div className="list">
             <h1>{ courseCode }</h1>
@@ -26,7 +31,7 @@ export default function PypList({ courseCode }) {
                 <tbody>
                     {pyps && pyps.map((pypName, i) =>  {
                         return (
-                        <tr key={i}>
+                            <tr key={i}>
                             <PypCard pypName={pypName} />
                         </tr>
                         );
@@ -34,6 +39,8 @@ export default function PypList({ courseCode }) {
                 </tbody>
             </table>
             </div>
+        </>
+        }
         </div>
     );
 }

@@ -14,7 +14,7 @@ export default function CourseList({ courses }) {
             <tbody>
                 {courses.map((courseCode, i) =>  {
                     return (
-                    <tr key={i}>
+                        <tr key={i}>
                         <CourseCard courseCode={courseCode} />
                     </tr> 
                 );
