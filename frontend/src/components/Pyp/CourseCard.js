@@ -6,6 +6,7 @@ export default function CourseCard({ courseCode }) {
     const { fetchPypNames } = useCourseList();
     const [pypNames, setPypNames] = useState([]);
 
+    // fetch the number of papers for each course code
     useEffect(() => {
         fetchPypNames(courseCode.courseCode, setPypNames);
     }, [courseCode.courseCode, fetchPypNames]);

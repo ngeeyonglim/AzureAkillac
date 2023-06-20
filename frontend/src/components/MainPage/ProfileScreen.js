@@ -13,12 +13,15 @@ export function useEdit() {
 export default function ProfileScreen() {
     const { handleUser } = useUser();
     const [editMode, setEditMode] = useState(false);
+
+    // update all components once editing is done
     const handleEdit = () => {
         if (editMode) {
             handleUser();
         }
         setEditMode(!editMode);
     };
+    
     return (
         <EditContext.Provider value={editMode}>
             <div className="profilescreen">

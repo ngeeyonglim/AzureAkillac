@@ -11,7 +11,8 @@ export default function LoginScreen() {
   const [createPassword, setCreatePassword] = useState("");
   const [signUp, setSignUp] = useState(false); // True if user is signing up
   const auth = getAuth();
-
+  
+  // signs in the user with the given email and password
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -22,10 +23,12 @@ export default function LoginScreen() {
     }
   };
 
+  // creates a new user with the given email and password
   const handleCreate = async (event) => {
     event.preventDefault();
     try {
       const user = await createUserWithEmailAndPassword(auth, createEmail, createPassword);
+      // Create a profile for the user
       if (user) {
         createProfile(user.user.uid, { uid: user.user.uid });
       }

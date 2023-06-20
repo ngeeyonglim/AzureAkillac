@@ -1,9 +1,20 @@
 import DropBox from "./Dropbox";
 import NavBar from "../NavBar";
 import { useUpdatePypList } from "./PypListContext";
+import { useEffect } from "react";
 
 export default function UploadScreen() {
-    const { handleSetPyps, handleUploadPyp, uploadPyp } = useUpdatePypList();
+    const { handleSetPyps, handleUploadPyp, uploadPyp, valid, handleValid } = useUpdatePypList();
+
+    // resets valid to false after 3 seconds to hide the "Upload Successful!" message
+    useEffect(() => {
+        if (valid) {
+            setTimeout(() => {
+                handleValid();
+            }, 3000);
+        }
+    }, [valid, handleValid]);
+
     return (
         <div>
             <NavBar />
@@ -90,6 +101,7 @@ export default function UploadScreen() {
                     Upload
                 </button>
             </form>
+                {valid && <p className="upload-valid">Upload Successful!</p>}
         </div>
     )
 }

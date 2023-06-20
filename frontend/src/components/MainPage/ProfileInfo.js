@@ -9,6 +9,7 @@ export default function ProfileInfo() {
     const [name, setName] = useState("");
     const [major, setMajor] = useState("");
 
+    // update the name and major in the database
     const handleNameChange = async (event) => {
         setName(event.target.value);
         await updateProfile(profile.uid, { name: event.target.value });
@@ -19,6 +20,7 @@ export default function ProfileInfo() {
         await updateProfile(profile.uid, { major: event.target.value });
     };
 
+    // update the name and major in the component upon loading the profile
     useEffect(() => {
         if (profile?.name) {
             setName(profile.name);

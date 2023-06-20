@@ -53,6 +53,14 @@ export function PypListProvider({ children }) {
     const handleResetCourseCode = (event) => {
         setCourseCode("");
     };
+
+    // check if file uploaded is valid
+    const [valid, setValid] = useState(false);
+
+    // reset valid to false after a successful upload
+    const handleValid = () => {
+        setValid(false);
+    };
     
     // check if the pyp to be uploaded is valid
     function isValidUpload(pyp) {
@@ -62,12 +70,24 @@ export function PypListProvider({ children }) {
         pyp.ansOrQuestions && pyp.file.length > 0;
     }
 
+    // check if the pyp to be uploaded is a duplicate
+    async function isFileDuplicate(pyp) {
+        const { courseCode, pypYear1, pypYear2, semester, midOrFinals, ansOrQuestions } = pyp;
+        const pypYear = pypYear1 + pypYear2;
+        const response = await fetch(`/getFileNames?courseCode=${courseCode}&pypYear=${pypYear}&semester=${semester}&midOrFinals=${midOrFinals}`, { method: 'GET' });
+        const data = await response.json();
+        const duplicate = data.filter(file => file.ansOrQuestions === ansOrQuestions);
+        return duplicate.length > 0;
+    }
+
     // push pyp to backend and pull again to update list
     // and resets upload input fields
-    const handleSetPyps = (event) => {
+    const handleSetPyps = async (event) => {
         event.preventDefault();
         if (!isValidUpload(uploadPyp)) {
             alert("Invalid upload");
+        } else if (await isFileDuplicate(uploadPyp)) {
+            alert("Past year Paper already exists");
         } else {
             const uploadFile = async () => {
                 const formData = new FormData();
@@ -83,10 +103,8 @@ export function PypListProvider({ children }) {
                         method: 'POST',
                         body: formData,
                     });
-
                     if (response.ok) {
-                        // File uploaded successfully
-                        console.log('File uploaded successfully');
+                        setValid(true);
                     } else {
                         // Handle error response
                         console.error('Error uploading file');
@@ -123,7 +141,6 @@ export function PypListProvider({ children }) {
         }
     };
 
-
     // fetch list of pyps of specific course from backend
     const fetchPypNames = async (courseCode, setPyps) => {
         try {
@@ -136,7 +153,6 @@ export function PypListProvider({ children }) {
             console.error('Error fetching Pyp names:', error);
         }
     };
-
 
     // fetch files of respective pyp from backend
     const fetchPypFiles = async (courseCode, pypYear, semester, midOrFinals, setFiles) => {
@@ -151,6 +167,7 @@ export function PypListProvider({ children }) {
         }
     };
 
+    // fetch list of courses from backend on page load
     useEffect(() => {
         fetchCourses();
     }, []);
@@ -158,7 +175,7 @@ export function PypListProvider({ children }) {
     return (
         <CourseListContext.Provider value={{ courses, fetchPypFiles, fetchPypNames, fetchCourses }}>
             <PypListUpdateContext.Provider 
-                value={{handleSetPyps, handleUploadPyp, uploadPyp}}>
+                value={{handleSetPyps, handleUploadPyp, uploadPyp, valid, handleValid}}>
                     <FilteredCourseCodeContext.Provider 
                         value={{courseCode, 
                         handleSetCourseCode, 

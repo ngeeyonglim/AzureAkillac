@@ -8,10 +8,12 @@ export default function Pyp({ pypName }) {
     const [files, setFiles] = useState([]);
     const { courseCode, pypYear, semester, midOrFinals } = pypName;
 
+    // fetch the PYP files for the named PYP
     useEffect(() => {
         fetchPypFiles(courseCode, pypYear, semester, midOrFinals, setFiles);
     }, [courseCode, pypYear, semester, midOrFinals, fetchPypFiles]);
 
+    // filter the files into questions and answers
     const qns = files.filter(file => file.ansOrQuestions === "Questions");
     const ans = files.filter(file => file.ansOrQuestions === "Answers");
 

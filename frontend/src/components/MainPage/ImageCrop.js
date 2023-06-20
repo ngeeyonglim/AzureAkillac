@@ -9,6 +9,7 @@ export default function ImageCrop({ handleImageUpload}) {
   const [croppedArea, setCroppedArea] = useState(null);
   const inputRef = useRef();
 
+  // Invoked when selecting new image
   const handleOnChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
@@ -27,12 +28,14 @@ export default function ImageCrop({ handleImageUpload}) {
     inputRef.current.click();
   };
 
+  // get the cropped image dimensions
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
   };
 
   // Generating Cropped Image When Done Button Clicked
   const onCropDone = (imgCroppedArea) => {
+    // Creating canvas to crop image
     const canvas = document.createElement("canvas");
     canvas.width = imgCroppedArea.width;
     canvas.height = imgCroppedArea.height;
@@ -41,6 +44,7 @@ export default function ImageCrop({ handleImageUpload}) {
 
     let image = new Image();
     image.src = newImage;
+    // Draw cropped image
     image.onload = function () {
       context.drawImage(
         image,
@@ -80,7 +84,7 @@ export default function ImageCrop({ handleImageUpload}) {
           />
         <button className="profile-img-button" onClick={onChooseImg}>
           <img src={require("../../images/edit-image-logo.png")} alt="edit" 
-          className="profile-img-button-img"/>
+            className="profile-img-button-img"/>
         </button>
       </div>)
       : (

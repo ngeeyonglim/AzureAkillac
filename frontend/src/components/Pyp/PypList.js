@@ -7,6 +7,7 @@ export default function PypList({ courseCode }) {
     const { fetchPypNames } = useCourseList();
     const [pyps, setPyps] = useState([]);
 
+    // fetch the PYPs for the course code
     useEffect(() => {
         fetchPypNames(courseCode, setPyps);
     }, [courseCode, fetchPypNames]);
